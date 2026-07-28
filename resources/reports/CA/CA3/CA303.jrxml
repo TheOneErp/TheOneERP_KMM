@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CA301" language="javascript" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="5e0129c0-c08e-4ad6-ad2b-af1f9cabd99a">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="haishang2"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="201"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="792"/>
+	<property name="ireport.zoom" value="2.5937424601000023"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.collapse.row.span" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.collapse.column.span" value="false"/>
+	<property name="com.jaspersoft.studio.grid.visible" value="true"/>
+	<property name="com.jaspersoft.studio.grid.gridWidth" value="1"/>
+	<property name="com.jaspersoft.studio.grid.gridHeight" value="1"/>
+	<property name="com.jaspersoft.studio.grid.originX" value="0"/>
+	<property name="com.jaspersoft.studio.grid.originY" value="0"/>
+	<property name="com.jaspersoft.studio.grid.snapToGrid" value="true"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="vendor_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vendor_code"/>
+	</field>
+	<field name="vendor_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vendor_name"/>
+	</field>
+	<field name="receive_day" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="receive_day"/>
+	</field>
+	<field name="product_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="product_code"/>
+	</field>
+	<field name="product_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="product_name"/>
+	</field>
+	<field name="body_num" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="body_num"/>
+	</field>
+	<field name="unit_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="unit_name"/>
+	</field>
+	<field name="body_price" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="body_price"/>
+	</field>
+	<field name="body_subtotal" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="body_subtotal"/>
+	</field>
+	<field name="body_remarks" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="remarks"/>
+	</field>
+	<field name="s_receive_day" class="java.lang.String"/>
+	<field name="e_receive_day" class="java.lang.String"/>
+	<field name="s_vendor_code" class="java.lang.String"/>
+	<field name="e_vendor_code" class="java.lang.String"/>
+	<field name="s_product_code" class="java.lang.String"/>
+	<field name="e_product_code" class="java.lang.String"/>
+	<field name="user" class="java.lang.String"/>
+	<field name="pay_status" class="java.lang.String"/>
+	<field name="abort_day" class="java.lang.String"/>
+	<field name="body_num2" class="java.math.BigDecimal"/>
+	<field name="unit_name2" class="java.lang.String"/>
+	<field name="body_price2" class="java.lang.String"/>
+	<field name="body_subtotal2" class="java.math.BigDecimal"/>
+	<field name="vendor_cat_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vendor_code"/>
+	</field>
+	<field name="receive_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vendor_code"/>
+	</field>
+	<field name="abort_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vendor_code"/>
+	</field>
+	<field name="remarks" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vendor_code"/>
+	</field>
+	<variable name="num" class="java.lang.String">
+		<variableExpression><![CDATA[$F{body_num}+$F{unit_name}]]></variableExpression>
+	</variable>
+	<variable name="num2" class="java.lang.String">
+		<variableExpression><![CDATA[$F{body_num2}+$F{unit_name2}]]></variableExpression>
+	</variable>
+	<variable name="exportday" class="java.lang.String"/>
+	<variable name="receive_day" class="java.lang.String">
+		<variableExpression><![CDATA[$F{s_receive_day}+"~"+$F{e_receive_day}]]></variableExpression>
+	</variable>
+	<variable name="vendor_code" class="java.lang.String">
+		<variableExpression><![CDATA[$F{s_vendor_code}+"~"+$F{e_vendor_code}]]></variableExpression>
+	</variable>
+	<variable name="product_code" class="java.lang.String">
+		<variableExpression><![CDATA[$F{s_product_code}+"~"+$F{e_product_code}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="30" uuid="fa19a0d7-908b-4ede-a6c0-d65e7ddd5799">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font" size="16"/>
+				</textElement>
+				<text><![CDATA[進貨明細表]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="70" height="20" uuid="dc01e3c8-b339-4107-80d6-af1b4d9573a0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[查詢日期：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="70" height="20" uuid="66ffc728-65b2-4961-8f97-61a98de0e640">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[廠商代碼：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="70" width="70" height="20" uuid="a2883012-6053-4465-ad4f-1b79ae4d707a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[產品代碼：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="605" y="30" width="135" height="20" uuid="4b3f4ebd-0a5f-433e-b70c-59dc2224e291">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[列印日期：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="605" y="50" width="135" height="20" uuid="4694317e-10e0-48ce-a148-6863f9db4e81">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[列印人員：]]></text>
+			</staticText>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="740" y="30" width="62" height="20" uuid="b0b17b79-61ae-4d96-80c3-de9cd0ed927e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[NOW( )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="70" y="30" width="535" height="20" uuid="e62e8fdd-d42e-4c1c-b79e-5ddacba2a44e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{s_receive_day}==null?"":$F{s_receive_day})+
+($F{s_receive_day}!=null||$F{e_receive_day}!=null?"~":"")+
+($F{e_receive_day}==null?"":$F{e_receive_day})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="70" y="50" width="535" height="20" uuid="67861c7d-432e-4c71-a1dc-ea5323877eaa">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{s_vendor_code}==null?"":$F{s_vendor_code})+
+($F{s_vendor_code}!=null||$F{e_vendor_code}!=null?"~":"")+
+($F{e_vendor_code}==null?"":$F{e_vendor_code})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="70" y="70" width="535" height="20" uuid="60234824-9238-4c47-a2b0-0a0eb730551b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{s_product_code}==null?"":$F{s_product_code})+
+($F{s_product_code}!=null||$F{e_product_code}!=null?"~":"")+
+($F{e_product_code}==null?"":$F{e_product_code})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="740" y="50" width="62" height="20" uuid="d32889bf-7715-47b5-b4f3-dbc556ad80a6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{user}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement x="156" y="0" width="60" height="20" uuid="4a0ee2e4-e91c-4fbe-a556-1de7769c613e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[廠商代碼]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="0" width="104" height="20" uuid="fc146438-6d8a-446a-a7d7-6c53dbb977c3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[廠商名稱]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="60" height="20" uuid="c772123f-4c5a-40e2-a158-eb1e3f66e8e3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[進貨日期]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="60" height="20" uuid="0e7ccbc6-f79b-44d9-9bd9-30cd746f5735">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[品號]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="120" height="20" uuid="55645be5-3364-4162-9e07-c0618fd8886c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[品名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="560" y="0" width="45" height="20" uuid="09eaf391-e341-4697-a178-1da6b3dc08b0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[數量]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="0" width="90" height="20" uuid="2da2ed8c-703f-46c8-bcc0-e9089e815bee">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[備註]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="70" height="20" uuid="86f5b60a-7e21-412b-a474-3c07ef188b72">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[單據號碼]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="0" width="86" height="20" uuid="98878d7a-ba57-498d-bcc8-30c6730edfcf">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[廠商類別]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="0" width="62" height="20" uuid="37215fbe-fcfd-4bf5-ab27-957862946069">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[品項備註]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="605" y="0" width="45" height="20" uuid="1ab8dd28-7364-488c-8278-119507b545c5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[單位]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Prevent">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField isStretchWithOverflow="true" pattern="yyyy-MM-dd">
+				<reportElement stretchType="RelativeToTallestObject" x="320" y="0" width="60" height="13" uuid="fb4d3526-e2ae-4941-a7ac-4de7b19a8027">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{receive_day}==null?"退回項目"+"("+$F{abort_day}+")": $F{receive_day}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="380" y="0" width="60" height="13" uuid="b2af4594-47c9-4351-925e-f9e7422917f2">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_code}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="440" y="0" width="120" height="13" uuid="7b6e66e6-db79-49df-bd81-eec79590e5c3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="650" y="0" width="90" height="13" uuid="5ab9fc1a-5fe0-4d62-a780-8da5e04f6bb6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="0810font"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{remarks}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement stretchType="RelativeToTallestObject" x="560" y="0" width="45" height="13" uuid="85a2f3bd-a68d-4d8a-a6c7-3f60fba5dadf">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{body_num}==null?$F{body_num2}: $F{body_num}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="216" y="0" width="104" height="13" uuid="e2b45638-9c40-4d08-a444-88c8e4d9ec2d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vendor_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="156" y="0" width="60" height="13" uuid="13826f87-2efe-4454-8972-dff093133a65">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vendor_code}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="70" y="0" width="86" height="13" uuid="c86bc526-d7a6-47b6-a0b5-ff250256c4bd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vendor_cat_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="yyyy-MM-dd">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="70" height="13" uuid="e9bf9122-eb22-4fbd-b3fd-8e1a4aeba697">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{receive_code}==null?"退回項目"+"("+$F{abort_code}+")": $F{receive_code}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="740" y="0" width="62" height="13" uuid="e8f0ba2c-cdcb-4d94-b595-70980f92e76c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{body_remarks}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement stretchType="RelativeToTallestObject" x="605" y="0" width="45" height="13" uuid="b28c5892-afe7-48ce-957b-dd5b70165628">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unit_name}?$F{unit_name}: $F{unit_name2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30">
+			<textField>
+				<reportElement x="0" y="0" width="380" height="30" uuid="57896d1c-812e-41b5-a073-7841aa8db1c3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA["第" + $V{PAGE_NUMBER} + "頁/"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="380" y="0" width="422" height="30" uuid="72214add-718b-47db-b3b9-9602089f9cab">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA["共" + $V{PAGE_NUMBER} +"頁"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

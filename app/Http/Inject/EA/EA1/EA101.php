@@ -1,0 +1,259 @@
+<?php
+
+namespace App\Http\Inject\EA\EA1;
+use Illuminate\Support\Facades\DB;
+use App\Http\Inject\InjectBase;
+use App\Utils\TranslationUtil;
+use App\Utils\VerifyUtil;
+use App\Utils\PageUtil;
+//新增新的CLASS需到CMD下指令：D:\xampp\htdocs\haishang>composer dumpautoload
+class EA101 extends InjectBase
+{
+    static public function atSave(&$data,$verify = false)
+	{
+		if( !array_key_exists('status',$data) ){
+			$page_id = 47;
+			$pageData = TranslationUtil::getPageDataWithTranslation($page_id);
+			// Get data
+			$data = PageUtil::getData($pageData, $data['id']);
+			$data['status'] = 'add';
+		}else{
+			$data['status'] = $data['status'] == "" ? "update" : $data['status'];
+        }
+        $productdata = DB::table('AA202_30')
+                 ->select('product_code','product_name','unit_code','unit_name')
+                 ->where('product_kind', '產品')
+                 ->get();
+        if($data['status'] == 'add'){
+            foreach($productdata as $key => $val){
+                DB::table('EA204_79')
+                    ->insert([
+                        'product_code' => $val->product_code,
+                        'product_name' => $val->product_name,
+                        'num' => '0',
+                        'unit_code' => $val->unit_code,
+                        'unit_name' => $val->unit_name,
+                        'depot_code' => $data['data']['depot_code'],
+                        'depot_name' => $data['data']['depot_name'],
+                        'safe_num' => '0',
+                    ]);
+            }
+
+        }else if($data['status'] == 'update'){
+            DB::table('EA204_79')
+                ->where('depot_code', $data['data']['depot_code'])
+                ->update([
+                    'depot_code' => $data['data']['depot_code'],
+                    'depot_name' => $data['data']['depot_name'],
+                ]);
+        }
+    }
+    static public function bfDelete(&$data,$verify = false){
+        if($verify){
+			$page_id = 47;
+			$pageData = TranslationUtil::getPageDataWithTranslation($page_id);
+			// Get data
+			$data = PageUtil::getData($pageData, $data['id']);
+        }
+        $code = $data['data']['depot_code'];
+        $results = DB::select(
+        "DECLARE @tablename NVARCHAR(50)
+        DECLARE @cloumnname NVARCHAR(50)
+        DECLARE @store TINYINT
+
+        SET @tablename=''
+        SET @cloumnname='depot_code'
+
+        BEGIN
+
+        SELECT DISTINCT SUBSTRING(so.name,1,CHARINDEX('_',so.name)-1) as 't',so.name as name,sc.name as colname FROM sysobjects so
+        INNER JOIN syscolumns sc ON so.id =sc.id
+        INNER JOIN systypes st ON st.xtype=sc.xtype
+        WHERE (so.type='U'AND st.name <> 'sysname')
+        AND
+        so.name LIKE '%'+@tablename+'%'
+        AND
+        sc.name LIKE '%'+@cloumnname+'%'
+
+        order by 't'
+
+        END"
+        );
+        $pagecode = '';
+        $translations='';
+        //dd($results);
+        $samet = [];
+        $isok = false;
+        foreach($results as $key => $val){
+            if($val->t != 'EA101' && $val->t != 'BA204' && $val->t != 'BA205' && $val->t != 'BA206' && $val->t != 'CA204' && $val->t != 'CA205' && $val->t != 'DA203' && $val->t != 'BA301' && $val->t != 'CA301' && $val->t != 'DA301'){
+                if($val->t == 'EA204'){
+                    $drpotnum = DB::table('EA204_79')->select('num')->where('depot_code', $data['data']['depot_code'])->get();
+                    foreach($drpotnum as $dkey => $dval){
+                        if($dval->num != .00 && $dval->num != '.00' && $dval->num != 0.00 && $dval->num != '0.00'){
+                            $isok = true;
+                        }
+                    }
+                    if($isok == true){
+                        $translations = TranslationUtil::getTranslationByCode($val->t);
+                        $pagecode = $pagecode."「".$translations."」";
+                    }
+                }else{
+                    if( array_key_exists($val->t,$samet) ){
+                        array_push($samet[$val->t],$results[$key]);
+
+                    }else{
+                        $samet[$val->t] = [];
+                        array_push($samet[$val->t],$results[$key]);
+                    }
+                }
+            }
+        }
+        foreach($samet as $key=>$val){
+            //dd($samet[$key][0]->name);
+            $indata = DB::table($samet[$key][0]->name)
+                    ->select('*')
+                    ->where($samet[$key][0]->colname, $code)
+                    ->get();
+            if(count($indata) > 0){
+                $translations = TranslationUtil::getTranslationByCode($samet[$key][0]->t);
+                $pagecode = $pagecode."「".$translations."」";
+            }else{
+                if(!empty($samet[$key][1])){
+                    $indata2 = DB::table($samet[$key][1]->name)
+                            ->select('*')
+                            ->where($samet[$key][1]->colname, $code)
+                            ->get();
+                    if(count($indata2) > 0){
+                        $translations = TranslationUtil::getTranslationByCode($samet[$key][1]->t);
+                        $pagecode = $pagecode."「".$translations."」";
+                    }
+                }
+                if(!empty($samet[$key][2])){
+                    $indata2 = DB::table($samet[$key][2]->name)
+                            ->select('*')
+                            ->where($samet[$key][2]->colname, $code)
+                            ->get();
+                    if(count($indata2) > 0){
+                        $translations = TranslationUtil::getTranslationByCode($samet[$key][2]->t);
+                        $pagecode = $pagecode."「".$translations."」";
+                    }
+                }
+            }
+        }
+        //加工單、完工單子件如果有被引用也不能刪
+        $da201 = DB::table('DA201_46')->select('*')->where('component_depot', $code)->get();
+        if(count($da201) > 0){
+            $translations = TranslationUtil::getTranslationByCode('DA201');
+            $pagecode = $pagecode."「".$translations."」";
+        }
+        $da202 = DB::table('DA202_58')->select('*')->where('component_depot', $code)->get();
+        if(count($da202) > 0){
+            $translations = TranslationUtil::getTranslationByCode('DA202');
+            $pagecode = $pagecode."「".$translations."」";
+        }
+        return array(
+            'pagecode' => $pagecode,
+            'code' => $code
+        );
+    }
+    // View
+    static public function beforeView(&$id, &$pageData)
+    {
+    }
+    static public function afterView(&$id, &$data, &$pageData)
+    {
+    }
+
+    // Save
+    static public function beforeSave(&$data, &$pageData)
+    {
+    }
+    static public function beforeDatasetValidation(&$dataset, &$schema, &$rules, &$pageData)
+    {
+    }
+    static public function afterDatasetValidationSuccess(&$dataset, &$schema, &$rules, &$validationResult, &$pageData)
+    {
+    }
+    static public function afterDatasetValidationFail(&$dataset, &$schema, &$rules, &$validationResult, &$pageData)
+    {
+    }
+    static public function beforeDatasetInsert(&$dataset, &$schema, &$insertData, &$pageData)
+    {
+    }
+    static public function afterDatasetInsert(&$dataset, &$schema, &$insertData, &$pageData)
+    {
+    }
+    static public function beforeDatasetUpdate(&$dataset, &$schema, &$updateData, &$pageData)
+    {
+    }
+    static public function afterDatasetUpdate(&$dataset, &$schema, &$updateData, &$pageData)
+    {
+    }
+    static public function afterSuccessSave(&$data, &$pageData)
+    {
+        $pageId = $pageData['page']['page_id'];
+		if ( !VerifyUtil::pageVerifyConfirmation($pageId) ) {
+			self::atSave($data);
+		}
+    }
+    static public function afterFailSave(&$data, &$pageData)
+    {
+    }
+
+    // Delete
+    static public function beforeDelete(&$data, &$pageData)
+    {
+        $pageId = $pageData['page']['page_id'];
+		if ( !VerifyUtil::pageVerifyConfirmation($pageId) ) {
+			// DB::beginTransaction();
+            $res = self::bfDelete($data);
+            if($res['pagecode'] != ''){
+                response()->json(['status' => false , 'message' => '倉庫代碼：'.$res['code'].'  已被引用於：'.$res['pagecode'].'，故無法刪除'])->send();
+                die();
+            }
+        };
+    }
+    static public function afterDeleteSuccess(&$data, &$pageData)
+    {
+        DB::table('EA204_79')->where('depot_code', $data['data']['depot_code'])->delete();
+    }
+    static public function afterDeleteFail(&$data, &$pageData)
+    {
+    }
+    // Filter
+    static public function beforeFilter(&$requestData, &$pageData)
+    {
+    }
+    static public function afterFilter(&$requestData, &$filterResult, &$pageData)
+    {
+    }
+    // List
+    static public function beforeList(&$pageData)
+    {
+    }
+    // Verify
+	//執行審核前 $result = array() boolen message//提示訊息
+    static public function beforeExecuteVerify(&$data, &$result){}
+	//每層成功
+    static public function afterSuccessExecuteVerify(&$data, &$result){}
+	//255觸發
+    static public function afterLastestExecuteVerify(&$data, &$result){
+		self::atSave($data,true);
+	}
+	static public function afterFailedExecuteVerify(&$data, &$result){}
+	//從255退回
+	static public function afterLastestReturnVerify(&$data, &$result){
+		$result["messages"] = ["此倉庫資料已被審核過，故無法退回"];
+        $result["success"] = false;
+	}
+	//退回前
+    static public function beforeReturnVerify(&$data, &$result){}
+	//退回後
+	static public function afterReturnVerify(&$data, &$result){}
+	//255重置
+	static public function afterLastestInitVerify(&$data, &$result){
+
+		$result["messages"] = ["此倉庫資料已被審核過，故無法重置"];
+        $result["success"] = false;
+	}
+}

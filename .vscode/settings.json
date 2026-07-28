@@ -1,0 +1,13 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "glm_system_rebuild",
+            "dialect": "MSSQL",
+            "name": "GLM",
+            "password": "asus12659",
+            "port": 1433,
+            "server": "59.127.210.115",
+            "username": "acer22969"
+        }
+    ]
+}

@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DA301" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="722d8617-fc40-41fb-b9f7-f74cdbf0bfbe">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="haishang2"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="finished_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="finished_code"/>
+	</field>
+	<field name="no" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="no"/>
+	</field>
+	<field name="undertakerday" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="undertakerday"/>
+	</field>
+	<field name="batch_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="batch_code"/>
+	</field>
+	<field name="batch_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="batch_no"/>
+	</field>
+	<field name="product_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="product_code"/>
+	</field>
+	<field name="product_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="product_name"/>
+	</field>
+	<field name="pro_cat_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="pro_cat_name"/>
+	</field>
+	<field name="da_num" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="da_num"/>
+	</field>
+	<field name="da_rate" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="da_rate"/>
+	</field>
+	<field name="da2_body_num" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="da2_body_num"/>
+	</field>
+	<field name="da2_body_rate" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="da2_body_rate"/>
+	</field>
+	<field name="da_batch_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="da_batch_code"/>
+	</field>
+	<field name="da_batch_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="da_batch_no"/>
+	</field>
+	<field name="ba_price" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="ba_price"/>
+	</field>
+	<field name="ba_undertakerday" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="ba_undertakerday"/>
+	</field>
+	<field name="client" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="client"/>
+	</field>
+	<field name="body_num" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="body_num"/>
+	</field>
+	<field name="body_price" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="body_price"/>
+	</field>
+	<field name="transport_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="transport_name"/>
+	</field>
+	<field name="remarks" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="remarks"/>
+	</field>
+	<field name="ca_price" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ca_price"/>
+	</field>
+	<field name="s_finished_code" class="java.lang.String"/>
+	<field name="e_finished_code" class="java.lang.String"/>
+	<field name="s_product_code" class="java.lang.String"/>
+	<field name="e_product_code" class="java.lang.String"/>
+	<field name="s_ship_code" class="java.lang.String"/>
+	<field name="e_ship_code" class="java.lang.String"/>
+	<field name="s_undertakerday" class="java.lang.String"/>
+	<field name="e_undertakerday" class="java.lang.String"/>
+	<field name="user" class="java.lang.String"/>
+	<variable name="rate_percent" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[(($F{da_num}.doubleValue()*$F{da_rate}.doubleValue())-($F{da2_body_num}.doubleValue()*$F{da2_body_rate}.doubleValue()))/$F{da2_body_num}.doubleValue()*$F{da2_body_rate}.doubleValue()]]></variableExpression>
+	</variable>
+	<variable name="print_date" class="java.lang.String"/>
+	<variable name="finished_code" class="java.lang.String">
+		<variableExpression><![CDATA[$F{s_finished_code}+"~"+$F{e_finished_code}]]></variableExpression>
+	</variable>
+	<variable name="product_code" class="java.lang.String">
+		<variableExpression><![CDATA[$F{s_product_code}+"~"+$F{e_product_code}]]></variableExpression>
+	</variable>
+	<variable name="ship_code" class="java.lang.String">
+		<variableExpression><![CDATA[$F{s_ship_code}+"~"+$F{e_ship_code}]]></variableExpression>
+	</variable>
+	<variable name="undertakerday" class="java.lang.String">
+		<variableExpression><![CDATA[$F{s_undertakerday}+"~"+$F{e_undertakerday}]]></variableExpression>
+	</variable>
+	<variable name="ca_price1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{ca_price}]]></variableExpression>
+	</variable>
+	<variable name="dasum" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{da_num}*$F{da_rate}]]></variableExpression>
+	</variable>
+	<variable name="dasum2" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{da2_body_num}*$F{da2_body_rate}]]></variableExpression>
+	</variable>
+	<group name="DANoGroup">
+		<groupExpression><![CDATA[$F{finished_code}+$F{no}]]></groupExpression>
+		<groupHeader>
+			<band height="46">
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="90" height="30" uuid="3f5e3271-1357-47c2-b34a-21c4ddbfcdba"/>
+					<box>
+						<topPen lineWidth="4.25" lineStyle="Double" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{finished_code}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="90" y="0" width="30" height="30" uuid="7a863d19-da59-4200-89ae-a694ba06df9a"/>
+					<box>
+						<topPen lineWidth="4.25" lineStyle="Double" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{no}]]></textFieldExpression>
+				</textField>
+				<textField pattern="yyyy-MM-dd" isBlankWhenNull="true">
+					<reportElement x="120" y="0" width="60" height="30" uuid="271af2ca-e303-4936-a07a-4e295a3a7282"/>
+					<box>
+						<topPen lineWidth="4.25" lineStyle="Double" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{undertakerday}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="180" y="0" width="60" height="30" uuid="973ef24a-c111-484f-beab-c8feb09d3e0f"/>
+					<box>
+						<topPen lineWidth="4.25" lineStyle="Double" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{product_code}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="240" y="0" width="60" height="30" uuid="fcc6672e-179d-4c30-a839-5195d5b0e277"/>
+					<box>
+						<topPen lineWidth="4.25" lineStyle="Double" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{product_name}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="300" y="0" width="50" height="30" uuid="4ca3c177-eda2-4d5d-9f7b-6e550fe4577a"/>
+					<box>
+						<topPen lineWidth="4.25" lineStyle="Double" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pro_cat_name}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="350" y="0" width="40" height="30" uuid="1fc6d4cd-f80d-4281-9cd7-fa26f732762a"/>
+					<box>
+						<topPen lineWidth="4.25" lineStyle="Double" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{da_num}.doubleValue()*$F{da_rate}.doubleValue()]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="390" y="0" width="50" height="30" uuid="85ac38a6-ba4f-4676-8efc-a6e3ebed9c8f"/>
+					<box>
+						<topPen lineWidth="4.25" lineStyle="Double" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{da2_body_num}.doubleValue()*$F{da2_body_rate}.doubleValue()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="30" width="170" height="16" uuid="1e4cbc85-487c-4878-814d-1c99c6b516c4"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font"/>
+					</textElement>
+					<text><![CDATA[出貨單號]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="170" y="30" width="30" height="16" uuid="b97e2d72-b897-4413-8743-17ec030a304d"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font"/>
+					</textElement>
+					<text><![CDATA[NO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="200" y="30" width="60" height="16" uuid="af11309d-58a0-4155-afd0-bf1a53c4d5b0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font"/>
+					</textElement>
+					<text><![CDATA[出貨日期]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="260" y="30" width="110" height="16" uuid="683010ef-110f-410f-8618-6e4187f1d848"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font"/>
+					</textElement>
+					<text><![CDATA[客戶]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="370" y="30" width="40" height="16" uuid="94470ca7-5218-4997-b6f6-ea8238619efc"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font"/>
+					</textElement>
+					<text><![CDATA[數量]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="410" y="30" width="50" height="16" uuid="00218776-0baa-4cdb-b470-63f9d382d272"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font"/>
+					</textElement>
+					<text><![CDATA[單價]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="460" y="30" width="50" height="16" uuid="9e34fe90-c8b6-4219-ac09-58e90a829308"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font"/>
+					</textElement>
+					<text><![CDATA[運輸方式]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="510" y="30" width="44" height="16" uuid="f8cbc343-07fe-4d7e-beec-9212eab28a06"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font"/>
+					</textElement>
+					<text><![CDATA[備註]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="490" y="0" width="64" height="30" uuid="d37f0117-8056-47af-aa93-4f239bd73afe"/>
+					<box>
+						<topPen lineWidth="4.25" lineStyle="Double" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement>
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="440" y="0" width="50" height="30" uuid="4082ae57-9cef-4573-9a22-2985689e9e76"/>
+					<box>
+						<topPen lineWidth="4.25" lineStyle="Double" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new BigDecimal(
+    (
+        ($F{da_num}.doubleValue()*$F{da_rate}.doubleValue())-($F{da2_body_num}.doubleValue()*$F{da2_body_rate}.doubleValue())
+    )/($F{da2_body_num}.doubleValue()*$F{da2_body_rate}.doubleValue())*100
+)+"%"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="490" y="0" width="64" height="30" uuid="cd28734a-68ec-44b2-8a45-051ad070f9a8"/>
+					<box>
+						<topPen lineWidth="4.25" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ca_price}/($F{da_num}.doubleValue()*$F{da_rate}.doubleValue())]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="BAGroup">
+		<groupExpression><![CDATA[$F{batch_code}+$F{batch_no}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="170" height="30" uuid="e87d2733-2be8-451a-bf7d-b8eba400519d">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="28fe685a-c648-4bac-a866-2344c5509e6b"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{batch_code}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="170" y="0" width="30" height="30" uuid="1a7997d3-3f02-4c7f-92a7-f97c34736451">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3407cdd1-7591-47d1-a3f5-ca963e66ad3f"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{batch_no}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="410" y="0" width="50" height="30" uuid="0741fc43-b481-49ee-be88-dc269a535d22">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="582ca86a-7810-4002-b9a0-6d41fb87917c"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ba_price}]]></textFieldExpression>
+				</textField>
+				<textField pattern="yyyy-MM-dd" isBlankWhenNull="true">
+					<reportElement x="200" y="0" width="60" height="30" uuid="d48e90aa-800c-4020-b583-c6cd2edbbaff">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9a7e5566-9cb0-424d-96f0-9380757b54ad"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ba_undertakerday}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="260" y="0" width="110" height="30" uuid="36f7fb04-a232-44ad-8075-d13fe9eab8f9">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="003b72a8-8494-4dc0-9071-9402cdfd980a"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{client}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="460" y="0" width="50" height="30" uuid="6008c525-008a-4a12-bd28-7a5ac2f62063">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9e70e8ec-a03d-47be-bbac-7187c4a49215"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{transport_name}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="370" y="0" width="40" height="30" uuid="3c4186e1-2cdd-4301-8380-3d4fcb65e6c5">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c374d4a3-4b99-4a9f-adb8-72e0fb889272"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{body_num}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="510" y="0" width="44" height="30" uuid="623793a5-676f-4f4a-9049-8ffc19d7a1e2">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0794345f-8f53-419e-827f-e0a10b781023"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="0810font" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{remarks}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="94" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="554" height="30" uuid="409ec412-1096-4180-97da-54267605f4cc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font" size="16"/>
+				</textElement>
+				<text><![CDATA[完工發泡率與出貨軌跡]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="50" y="46" width="270" height="16" uuid="967f8db6-3dce-49b1-810d-ff2470bde68e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{s_product_code}==null?"":$F{s_product_code})+
+($F{s_product_code}!=null||$F{e_product_code}!=null?"~":"")+
+($F{e_product_code}==null?"":$F{e_product_code})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="30" width="50" height="16" uuid="5dbc545e-248d-4457-950a-1ca36996c02b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[完工單號:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="30" width="50" height="16" uuid="e6307903-6a9d-4d6b-96e9-036786d9534f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[印表人員:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="50" y="30" width="270" height="16" uuid="ea7b78f1-42bd-49d8-9e61-c5aff992ef8d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{s_finished_code}==null?"":$F{s_finished_code})+
+($F{s_finished_code}!=null||$F{e_finished_code}!=null?"~":"")+
+($F{e_finished_code}==null?"":$F{e_finished_code})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="78" width="50" height="16" uuid="a17c9035-7132-4922-a346-731ef9a17fa8"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[完工日期:]]></text>
+			</staticText>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="370" y="46" width="184" height="16" uuid="bd5706bb-179b-4e79-a736-ab0b80eacf6d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[NOW( )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="62" width="50" height="16" uuid="117dd113-7d72-44ab-9120-6576733a1274"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[出貨單號:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="370" y="30" width="184" height="16" uuid="2dc62821-ecf6-4af9-a7d6-6551b1b96d06">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{user}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="50" y="62" width="504" height="16" uuid="c1f8a1ed-fda3-42c9-8f8c-49462f785b91"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{s_ship_code}==null?"":$F{s_ship_code})+
+($F{s_ship_code}!=null||$F{e_ship_code}!=null?"~":"")+
+($F{e_ship_code}==null?"":$F{e_ship_code})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="50" y="78" width="504" height="16" uuid="5fb1f7dc-3a34-4414-9afe-9404806d8f43"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{s_undertakerday}==null?"":$F{s_undertakerday})+
+($F{s_undertakerday}!=null||$F{e_undertakerday}!=null?"~":"")+
+($F{e_undertakerday}==null?"":$F{e_undertakerday})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="46" width="50" height="16" uuid="6a63ad26-fe63-4c51-bfce-fadb67edcbf8"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[品號:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="46" width="50" height="16" uuid="e5d44c6a-e1c7-4c5a-a6db-f749fe3f2e05"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[印表日期:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement x="300" y="0" width="50" height="16" uuid="2f416058-fe8e-4e4d-af4c-def16784fe63"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[規格]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="60" height="16" uuid="9e0bc184-6101-415b-a928-69fa450b50c9"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[完工日期]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="60" height="16" uuid="7aacf007-8a77-4bdd-866d-ddc8c920b4e9"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[品號]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="50" height="16" uuid="7bf00639-7428-4142-b122-bd973b281d7b"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[發率]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="0" width="60" height="16" uuid="7d5be2f8-5719-4caf-a249-30e385270739"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[品名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="90" height="16" uuid="dcb3545a-e372-44aa-8af2-a9e81827557d"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[完工單號]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="0" width="30" height="16" uuid="d25451bb-c43b-42e8-a927-f1654df5e02a"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="0" width="40" height="16" uuid="effc1355-4f15-47a6-97ad-038758351f30"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[數量]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="0" width="64" height="16" uuid="bd8f7121-11dd-4851-a179-29794394d65e"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[單位成本]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="0" width="50" height="16" uuid="1e2c6f74-f449-46bf-aac7-0dcd5838cde8"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="0810font"/>
+				</textElement>
+				<text><![CDATA[工單數量]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="510" height="30" uuid="e383184e-c134-48a9-844d-a39474bde8fb"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["第" + $V{PAGE_NUMBER} + "頁/"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="510" y="0" width="44" height="30" uuid="c0713b5d-be11-4a1a-adab-05ff1dc96c31"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font" size="9" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["共" + $V{PAGE_NUMBER} + "頁"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DA301" pageWidth="420" pageHeight="595" columnWidth="380" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="722d8617-fc40-41fb-b9f7-f74cdbf0bfbe">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="haishang2"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="user" class="java.lang.String"/>
+	<field name="e_undertakerday" class="java.lang.String"/>
+	<field name="s_undertakerday" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="body_subtotal" class="java.math.BigDecimal"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="plus" class="java.math.BigDecimal"/>
+	<field name="sub" class="java.math.BigDecimal"/>
+	<variable name="subtotal" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{body_subtotal}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="380" height="26" uuid="409ec412-1096-4180-97da-54267605f4cc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Justified">
+					<font fontName="0810font" size="19"/>
+				</textElement>
+				<text><![CDATA[現金流量表]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="26" width="300" height="16" uuid="967f8db6-3dce-49b1-810d-ff2470bde68e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{s_undertakerday}==null?"":$F{s_undertakerday})+
+($F{s_undertakerday}!=null||$F{e_undertakerday}!=null?"~":"")+
+($F{e_undertakerday}==null?"":$F{e_undertakerday})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="264" y="13" width="56" height="13" uuid="5dbc545e-248d-4457-950a-1ca36996c02b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font" size="10"/>
+				</textElement>
+				<text><![CDATA[印表人員：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="264" y="0" width="56" height="13" uuid="e6307903-6a9d-4d6b-96e9-036786d9534f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font" size="10"/>
+				</textElement>
+				<text><![CDATA[印表日期：]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="13" width="60" height="13" uuid="ea7b78f1-42bd-49d8-9e61-c5aff992ef8d">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font" size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{user}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="26" width="80" height="16" uuid="6a63ad26-fe63-4c51-bfce-fadb67edcbf8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font" size="12"/>
+				</textElement>
+				<text><![CDATA[查詢區間：]]></text>
+			</staticText>
+			<textField pattern="yyyy-MM-dd" isBlankWhenNull="true">
+				<reportElement x="320" y="0" width="60" height="13" uuid="50e2075e-4d04-471d-89a2-358b63228d92">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font" size="10"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[NOW( )]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="18">
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="18" uuid="795e63f9-1121-4420-8662-f6d4f4f91ccc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box bottomPadding="2">
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Justified">
+					<font fontName="0810font" size="12"/>
+				</textElement>
+				<text><![CDATA[日期]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="200" height="18" uuid="b5694344-43bf-4195-a545-d60144e23f35">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box bottomPadding="2">
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Justified">
+					<font fontName="0810font" size="12"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[名稱]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="100" height="18" uuid="7220e089-8673-479c-9e56-3bcf740d14a3">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box bottomPadding="2">
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Justified">
+					<font fontName="0810font" size="12"/>
+					<paragraph rightIndent="30"/>
+				</textElement>
+				<text><![CDATA[金額]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="16">
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="0" width="200" height="16" uuid="48d70a7c-bf11-466e-9d82-d60466f918fd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font" size="12"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="80" height="16" uuid="3ae61e3a-e59a-453a-b591-a8307bf70e2f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.##" isBlankWhenNull="true">
+				<reportElement x="280" y="0" width="100" height="16" uuid="6b24b5b1-0732-4399-94f0-767a93736435">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font" size="12"/>
+					<paragraph rightIndent="30"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{body_subtotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="190" height="15" uuid="e383184e-c134-48a9-844d-a39474bde8fb"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["第" + $V{PAGE_NUMBER} + "頁/"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="190" y="0" width="190" height="15" uuid="c0713b5d-be11-4a1a-adab-05ff1dc96c31"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font" size="9" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["共" + $V{PAGE_NUMBER} + "頁"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="48">
+			<textField pattern="#,##0.##" isBlankWhenNull="true">
+				<reportElement x="280" y="32" width="100" height="16" uuid="20dedf62-9838-41b3-9e4a-6897723893f4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font" size="12"/>
+					<paragraph rightIndent="30"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{subtotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="226" y="32" width="54" height="16" uuid="cb7b89e3-1ab7-47e9-b655-08559b42f227">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font" size="12"/>
+				</textElement>
+				<text><![CDATA[合計：]]></text>
+			</staticText>
+			<textField pattern="#,##0.##" isBlankWhenNull="true">
+				<reportElement x="280" y="0" width="100" height="16" uuid="913df24b-1c99-47f2-bdef-89a62dc19400">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font" size="12"/>
+					<paragraph rightIndent="30"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plus}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.##" isBlankWhenNull="true">
+				<reportElement x="280" y="16" width="100" height="16" uuid="6a7a0766-dcfc-40e0-8764-b8817d2d63f0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font" size="12"/>
+					<paragraph rightIndent="30"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sub}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="226" y="16" width="54" height="16" uuid="5b19086a-8138-418e-80ac-93f645a6475f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font" size="12"/>
+				</textElement>
+				<text><![CDATA[總支出：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="0" width="54" height="16" uuid="dde3a32f-3c28-4df2-863a-8795ee988ff8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font" size="12"/>
+				</textElement>
+				<text><![CDATA[總收入：]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

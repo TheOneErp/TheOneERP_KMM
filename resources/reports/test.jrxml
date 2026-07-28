@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="db4d7605-b59a-4fa6-a2b8-9f9bd95dfcb7">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="json_test2.xml"/>
+	<parameter name="JSON_INPUT_STREAM" class="java.io.InputStream" isForPrompting="false"/>
+	<parameter name="net.sf.jasperreports.json.source" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="net.sf.jasperreports.json.sources" class="java.util.List" isForPrompting="false"/>
+	<parameter name="net.sf.jasperreports.json.date.pattern" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="net.sf.jasperreports.json.number.pattern" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="JSON_LOCALE" class="java.util.Locale" isForPrompting="false"/>
+	<parameter name="net.sf.jasperreports.json.locale.code" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="JSON_TIME_ZONE" class="java.util.TimeZone" isForPrompting="false"/>
+	<parameter name="net.sf.jasperreports.json.timezone.id" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="A1" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="A1"/>
+		<fieldDescription><![CDATA[A1]]></fieldDescription>
+	</field>
+	<field name="A2" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="A2"/>
+		<fieldDescription><![CDATA[A2]]></fieldDescription>
+	</field>
+	<field name="A3" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="A3"/>
+		<fieldDescription><![CDATA[A3]]></fieldDescription>
+	</field>
+	<field name="A4" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="A4"/>
+		<fieldDescription><![CDATA[A4]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="141" height="30" uuid="9e6ca6c2-9d1f-4201-8522-cd3652554f5f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3af11e34-c85f-4ac0-8658-adaa44939f2d"/>
+				</reportElement>
+				<text><![CDATA[A1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="0" width="138" height="30" uuid="f0eaa1c8-f895-4f71-85dc-f0727478505f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6d9c8f02-fe9a-486a-9cc9-0586ef723e53"/>
+				</reportElement>
+				<text><![CDATA[A2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="0" width="138" height="30" uuid="9e6a52f6-aa35-4445-ac03-5e99207a85cd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="847ba188-6bc0-4173-962a-dc0c709352e7"/>
+				</reportElement>
+				<text><![CDATA[A3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="0" width="138" height="30" uuid="44bd8e98-3f4d-4ff8-a29a-4e4b35090847">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8695327b-4e66-4e29-8a16-014123ce29b0"/>
+				</reportElement>
+				<text><![CDATA[A4]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="339" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="141" height="30" uuid="8721d62b-c1b6-47f8-afd7-950903359b52">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3af11e34-c85f-4ac0-8658-adaa44939f2d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{A1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="0" width="138" height="30" uuid="6932b604-c470-49c0-9a0d-d9d2240fb872">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6d9c8f02-fe9a-486a-9cc9-0586ef723e53"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{A2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="0" width="138" height="30" uuid="f0448dc0-7391-40bd-93b4-43ec8af17eeb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="847ba188-6bc0-4173-962a-dc0c709352e7"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{A3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="0" width="138" height="30" uuid="e822a5c4-5abf-4720-a057-5f71c7ccf4bb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8695327b-4e66-4e29-8a16-014123ce29b0"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{A4}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
