@@ -117,17 +117,15 @@ class EA301 extends InjectBase
         return $tmpArr;
     }
     static public function atDelete(&$data,$verify = false)
-	{
+    {
+        if($verify){
+            $page_id = 6270;
+            $pageData = TranslationUtil::getPageDataWithTranslation($page_id);
+            $data = PageUtil::getData($pageData, $data['id']);
+        }
 
-		if($verify){
-			$page_id = 6270;
-			$pageData = TranslationUtil::getPageDataWithTranslation($page_id);
-			// Get data
-			$data = PageUtil::getData($pageData, $data['id']);
-		}
-        $totalnum = 0;
         foreach($data['subData'][6247] as $key => $val){
-            $totalnum = $data['subData'][6247][$key]['data']['body_num']*$data['subData'][6247][$key]['data']['body_rate'];
+            $totalnum = $data['subData'][6247][$key]['data']['body_num']; // 原本是 body_num * body_rate
             $oldnum = DB::table('EA204_79')
                     ->where('product_code',$data['subData'][6247][$key]['data']['product_code'])
                     ->where('depot_code', $data['subData'][6247][$key]['data']['depot_code'])
@@ -138,9 +136,9 @@ class EA301 extends InjectBase
                     ->where('depot_code', $data['subData'][6247][$key]['data']['depot_code'])
                     ->update(['num' => $newnum]);
         }
-        $totalnum2 = 0;
+
         foreach($data['subData'][6248] as $key => $val){
-            $totalnum2 = $data['subData'][6248][$key]['data']['body_num']*$data['subData'][6248][$key]['data']['body_rate'];
+            $totalnum2 = $data['subData'][6248][$key]['data']['body_num']; // 原本是 body_num * body_rate
             $oldnum = DB::table('EA204_79')
                     ->where('product_code',$data['subData'][6248][$key]['data']['product_code'])
                     ->where('depot_code', $data['subData'][6248][$key]['data']['depot_code'])
@@ -234,7 +232,7 @@ class EA301 extends InjectBase
     // Delete
     static public function bfDelete(&$data,$verify = false)
 	{
-		// dd($data);
+		//dd($data);
 		if($verify){
 			$page_id = 6270;
 			$pageData = TranslationUtil::getPageDataWithTranslation($page_id);
@@ -283,6 +281,8 @@ class EA301 extends InjectBase
     }
     static public function afterDeleteSuccess(&$data, &$pageData)
     {
+        
+
         $pageId = $pageData['page']['page_id'];
 		if ( !VerifyUtil::pageVerifyConfirmation($pageId) ) {
 			DB::beginTransaction();
