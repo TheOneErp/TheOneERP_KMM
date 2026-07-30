@@ -57,7 +57,6 @@
             that.dataset.schema.fields.ssubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
-            that.dataset.subData[bodyId1][0].schema.fields.body_price.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
         }
 	})
@@ -69,7 +68,6 @@
             that.dataset.schema.fields.ssubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
-            that.dataset.subData[bodyId1][0].schema.fields.body_price.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
         }
     })
@@ -82,7 +80,6 @@
             that.dataset.schema.fields.ssubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
-            that.dataset.subData[bodyId1][0].schema.fields.body_price.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
         }
         let subData = that.dataset.subData[bodyId1];
@@ -106,7 +103,6 @@
             that.dataset.schema.fields.ssubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
-            that.dataset.subData[bodyId1][0].schema.fields.body_price.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
         }
         for (let element of subData) {
@@ -142,7 +138,7 @@
 			let dataPrice = data.purchase_price;
 
 			osubtotal = counSubtotal(dataset,subDataArray,parentDataset,"body_subtotal","body_num","body_price","osubtotal","discount",dataPrice)
-			countOriginal(osubtotal,parentDataset,"osubtotal","otax","ototal",taxrate,bodyId1,"body_subtotal");
+			countOriginal(osubtotal,parentDataset,"osubtotal","otax","ototal",taxrate,subDataArray,"body_subtotal");
 		    dataset.data.ssubtotal = parseFloat(dataset.data.osubtotal * rate).toFixed(2);
             dataset.data.stax = parseFloat(dataset.data.otax * rate).toFixed(2);
             dataset.data.stotal =parseFloat(dataset.data.ototal * rate).toFixed(2);
@@ -156,6 +152,7 @@
 			let taxrate = data.tax_taxrate;
 			let rate = dataset.data.rate;
 			let osubtotal = dataset.data.osubtotal;
+            let subDataArray = dataset.subData[bodyId1];
 			countOriginal(osubtotal,dataset,"osubtotal","otax","ototal",taxrate,bodyId1,"body_subtotal");
 		    dataset.data.ssubtotal = parseFloat(dataset.data.osubtotal * rate).toFixed(2);
             dataset.data.stax = parseFloat(dataset.data.otax * rate).toFixed(2);
@@ -168,12 +165,12 @@
 			let dataPrice = data.body_purchase_price;
 
 			osubtotal = counSubtotal(dataset,subDataArray,parentDataset,"body_subtotal","body_num","body_price","osubtotal","discount",dataPrice)
-			countOriginal(osubtotal,parentDataset,"osubtotal","otax","ototal",taxrate,bodyId1,"body_subtotal");
+			countOriginal(osubtotal,parentDataset,"osubtotal","otax","ototal",taxrate,subDataArray,"body_subtotal");
 			countStandard(osubtotal,parentDataset,rate,"ssubtotal","stax","stotal","otax","ototal");
 		}else if(fromField.field_code == "vendor_code" ){
                 formVue.dataset.data.source_receive_code.data.vendor_code=data.vendor_code;
-        }
-        
+        }else if( fromField.field_code == "source_receive_code" ){
+        } 
 	})
 
     window.injects.injectOnRowAdd.push((that, pageData, targetSubDataArray, dataset) => {})
@@ -227,6 +224,7 @@
 			let taxrate = dataset.data.taxrate;
 			let rate = dataset.data.rate;
 			let osubtotal = dataset.data.osubtotal;
+            let subDataArray = dataset.subData[bodyId1];
 
 		   countOriginal(osubtotal,dataset,"osubtotal","otax","ototal",taxrate,bodyId1,"body_subtotal");
 		   countStandard(osubtotal,dataset,rate,"ssubtotal","stax","stotal","otax","ototal");
@@ -295,7 +293,10 @@
 						let taxrate = parentDataset.data.taxrate;
 						let rate = parentDataset.data.rate;
 						osubtotal = counSubtotal(row,subDataArray,parentDataset,"body_subtotal","body_num","body_price","osubtotal","discount");
-						countOriginal(osubtotal,parentDataset,"osubtotal","otax","ototal",taxrate,bodyId1,"body_subtotal");
+                        if( row.data.body_subtotal != null ){
+                            row.data.body_subtotal = parseFloat(row.data.body_subtotal).toFixed(2);
+                        }
+						countOriginal(osubtotal,parentDataset,"osubtotal","otax","ototal",taxrate,subDataArray,"body_subtotal");
 						countStandard(osubtotal,parentDataset,rate,"ssubtotal","stax","stotal","otax","ototal");
                         that.parentVue().addEmptyRow(that.parentVue().dataset,bodyId1);
                     }
@@ -332,9 +333,12 @@
             });
         }
         osubtotal = counSubtotal(row,subDataArray,parentDataset,"body_subtotal","body_num","body_price","osubtotal","discount");
+        if( row.data.body_subtotal != null ){
+           row.data.body_subtotal = parseFloat(row.data.body_subtotal).toFixed(2);
+        }
         //原幣
         let taxrate = parentDataset.data.taxrate;
-        countOriginal(osubtotal,parentDataset,"osubtotal","otax","ototal",taxrate,bodyId1,"body_subtotal");
+        countOriginal(osubtotal,parentDataset,"osubtotal","otax","ototal",taxrate,subDataArray,"body_subtotal");
         //本位幣
 		parentDataset.data.ssubtotal = parseFloat(parentDataset.data.osubtotal * rate).toFixed(2);
 				parentDataset.data.stax = parseFloat(parentDataset.data.otax * rate).toFixed(2);

@@ -65,7 +65,6 @@
             that.dataset.schema.fields.ssubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
-            that.dataset.subData[bodyId1][0].schema.fields.body_price.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
         }
 	})
@@ -78,7 +77,6 @@
             that.dataset.schema.fields.ssubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
-            that.dataset.subData[bodyId1][0].schema.fields.body_price.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
         }
     })
@@ -91,7 +89,6 @@
             that.dataset.schema.fields.ssubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
-            that.dataset.subData[bodyId1][0].schema.fields.body_price.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
         }
         that.dataset.status = 'update'
@@ -177,7 +174,7 @@
             that.dataset.schema.fields.ssubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
-            that.dataset.subData[bodyId1][0].schema.fields.body_price.field_show_on_form = false ;
+   
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
         }
         let subData = that.dataset.subData[bodyId1];
