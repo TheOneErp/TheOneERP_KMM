@@ -184,9 +184,18 @@ class BA301{
             $sort[$key] = strtotime($part);
        }
        //dd($client_code,$ship_code,$idid,$sn,$product_code,$product_code,$ship_date,$datas);
-// dd($BA202data);
+        // dd($BA202data);
         if($BA202data != null){
-            array_multisort($datas, SORT_ASC,$code, SORT_ASC,$idid, SORT_ASC,$sn, SORT_ASC,$product_code, SORT_ASC, $sort, SORT_ASC, $BA202data);
+            array_multisort(
+                    $client_code, SORT_ASC, 
+                    $datas, SORT_ASC, 
+                    $code, SORT_ASC, 
+                    $idid, SORT_ASC, 
+                    $sn, SORT_ASC, 
+                    $product_code, SORT_ASC, 
+                    $sort, SORT_ASC, 
+                    $BA202data
+                );
         }
         //dd($BA202data);
         //$BA202data = $BA202data->sortBy('client_code');

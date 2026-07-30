@@ -227,11 +227,13 @@ class BA301{
         }
 
         $save1 = $save1
-        ->orderby('ship_date')
-        ->orderby('ship_code')
-        ->orderby('idid')
-        ->orderby('sn')
-        ->orderby('product_code')->get();
+            ->orderby('client_code')  // <--- 關鍵！優先依照「客戶代碼」排序，同一客戶的資料才會連續排在一起
+            ->orderby('ship_date')
+            ->orderby('ship_code')
+            ->orderby('idid')
+            ->orderby('sn')
+            ->orderby('product_code')
+            ->get();
 
        
         
