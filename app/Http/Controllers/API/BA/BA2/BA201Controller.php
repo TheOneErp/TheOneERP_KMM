@@ -305,7 +305,7 @@ class BA201Controller extends Controller{
 		$reportData = $reportData->unionAll($reportData1)->orderBy('client_code')->orderBy('idid')->orderBy('sn')->get();
 		$client_code = $reportData->pluck('client_code')->first();
 		$customData = DB::table('BA102_37 as a')
-		->select(DB::raw("a.client_code,a.client_name,a.cnt_balance,a.yn_cnt_cust,a.uniform_num,b.phone,c.addr") )
+		->select(DB::raw("a.client_code,a.client_name,a.cnt_balance,a.yn_cnt_cust,a.uniform_num,b.phone,a.fax,c.addr") )
 		->leftJoin('BA102_38 as b', 'b.parent_id','=','a.id')
 		->leftJoin('BA102_39 as c', 'c.parent_id','=','a.id')
 		->where('client_code','=',$client_code)
@@ -333,6 +333,7 @@ class BA201Controller extends Controller{
                 $row->phone = $customData->phone;
                 $row->addr = $customData->addr;
                 $row->uniform_num = $customData->uniform_num;
+				$row->fax = $customData->fax;
                 $row->company_name = $company_name;
                 $row->company_tel = $company_tel;
                 $row->company_fax = $company_fax;
@@ -348,6 +349,7 @@ class BA201Controller extends Controller{
                 $row->phone = $customData->phone;
                 $row->addr = $customData->addr;
                 $row->uniform_num = $customData->uniform_num;
+				$row->fax = $customData->fax;
                 $row->company_name = $company_name;
                 $row->company_tel = $company_tel;
                 $row->company_fax = $company_fax;
@@ -405,7 +407,7 @@ class BA201Controller extends Controller{
     // ->whereNotNull('b.combi_name');
 		$client_code = $reportData->pluck('client_code')->first();
 		$customData = DB::table('BA102_37 as a')
-		->select(DB::raw("a.client_code,a.client_name,a.cnt_balance,a.yn_cnt_cust,a.uniform_num,b.phone,c.addr") )
+		->select(DB::raw("a.client_code,a.client_name,a.cnt_balance,a.yn_cnt_cust,a.uniform_num,b.phone,a.fax,c.addr") )
 		->leftJoin('BA102_38 as b', 'b.parent_id','=','a.id')
 		->leftJoin('BA102_39 as c', 'c.parent_id','=','a.id')
 		->where('client_code','=',$client_code)
@@ -433,6 +435,7 @@ class BA201Controller extends Controller{
                 $row->phone = $customData->phone;
                 $row->addr = $customData->addr;
                 $row->uniform_num = $customData->uniform_num;
+				$row->fax = $customData->fax;
                 $row->company_name = $company_name;
                 $row->company_tel = $company_tel;
                 $row->company_fax = $company_fax;
@@ -448,6 +451,7 @@ class BA201Controller extends Controller{
                 $row->phone = $customData->phone;
                 $row->addr = $customData->addr;
                 $row->uniform_num = $customData->uniform_num;
+				$row->fax = $customData->fax;
                 $row->company_name = $company_name;
                 $row->company_tel = $company_tel;
                 $row->company_fax = $company_fax;
@@ -503,7 +507,7 @@ class BA201Controller extends Controller{
     // ->whereNotNull('b.combi_name');
 		$client_code = $reportData->pluck('client_code')->first();
 		$customData = DB::table('BA102_37 as a')
-		->select(DB::raw("a.client_code,a.client_name,a.cnt_balance,a.yn_cnt_cust,a.uniform_num,b.phone,c.addr") )
+		->select(DB::raw("a.client_code,a.client_name,a.cnt_balance,a.yn_cnt_cust,a.uniform_num,b.phone,a.fax,c.addr") )
 		->leftJoin('BA102_38 as b', 'b.parent_id','=','a.id')
 		->leftJoin('BA102_39 as c', 'c.parent_id','=','a.id')
 		->where('client_code','=',$client_code)
@@ -532,6 +536,7 @@ class BA201Controller extends Controller{
                 $row->phone = $customData->phone;
                 $row->addr = $customData->addr;
                 $row->uniform_num = $customData->uniform_num;
+				$row->fax = $customData->fax;
                 $row->company_name = $company_name;
                 $row->company_tel = $company_tel;
                 $row->company_fax = $company_fax;
@@ -547,6 +552,7 @@ class BA201Controller extends Controller{
                 $row->phone = $customData->phone;
                 $row->addr = $customData->addr;
                 $row->uniform_num = $customData->uniform_num;
+				$row->fax = $customData->fax;
                 $row->company_name = $company_name;
                 $row->company_tel = $company_tel;
                 $row->company_fax = $company_fax;
