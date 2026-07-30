@@ -31,6 +31,7 @@
 	<field name="sn" class="java.lang.String"/>
 	<field name="con" class="java.lang.String"/>
 	<field name="uniform_num" class="java.lang.String"/>
+	<field name="client_fax" class="java.lang.String"/>
 	<variable name="con_con" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{con}]]></variableExpression>
 	</variable>
@@ -381,6 +382,27 @@
 				</textElement>
 				<text><![CDATA[客戶統編 : ]]></text>
 			</staticText>
+			<textField isBlankWhenNull="true">
+					<reportElement x="301" y="128" width="121" height="16" uuid="e9a8b1a6-2538-48ba-bcfe-5a7417706152"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{client_fax}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="361" y="128" width="60" height="16" uuid="59e87ccc-3c39-4a12-8c06-7e9d3952f7ec"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font" size="10"/>
+				</textElement>
+				<text><![CDATA[客戶傳真 : ]]></text>
+			</staticText>
+
 		</band>
 	</pageHeader>
 	<detail>
