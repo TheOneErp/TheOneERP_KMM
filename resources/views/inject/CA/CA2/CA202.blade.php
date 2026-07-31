@@ -58,6 +58,7 @@
         that.dataset.data.receive_day = getTodayDate();
         that.dataset.data.undertakerday = getTodayDate();
         isview = false
+        /*
         if('{{session("username")}}' == "phaith" || '{{session("username")}}' == "yltest" || '{{session("username")}}' == "ocean"){
             that.dataset.schema.fields.osubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.otax.field_show_on_form = false ;
@@ -66,10 +67,11 @@
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
-        }
+        }*/
 	})
     window.injects.injectOnView.push((that, pageData, id) => {
         isview = true
+        /*
         if('{{session("username")}}' == "phaith" || '{{session("username")}}' == "yltest" || '{{session("username")}}' == "ocean"){
             that.dataset.schema.fields.osubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.otax.field_show_on_form = false ;
@@ -78,10 +80,11 @@
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
-        }
+        }*/
     })
     window.injects.injectOnEdit.push((that, pageData, id) => {
         isview = false
+        /*
         if('{{session("username")}}' == "phaith" || '{{session("username")}}' == "yltest" || '{{session("username")}}' == "ocean"){
             that.dataset.schema.fields.osubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.otax.field_show_on_form = false ;
@@ -90,7 +93,7 @@
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
-        }
+        }*/
         that.dataset.status = 'update'
         let subData = that.dataset.subData[bodyId1];
         for (let element of subData) {
@@ -167,6 +170,7 @@
     })
     window.injects.injectOnCopy.push((that, pageData, id) => {
         isview = false
+        /*
         if('{{session("username")}}' == "phaith" || '{{session("username")}}' == "yltest" || '{{session("username")}}' == "ocean"){
             that.dataset.schema.fields.osubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.otax.field_show_on_form = false ;
@@ -176,7 +180,7 @@
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
    
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
-        }
+        }*/
         let subData = that.dataset.subData[bodyId1];
         for (let element of subData) {
             if (element.schema) {

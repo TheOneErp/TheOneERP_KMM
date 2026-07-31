@@ -50,6 +50,7 @@
 		that.dataset.data.undertakername = '{{session("user_name")}}';
         that.dataset.data.abort_day = getTodayDate();
         that.dataset.data.undertakerday = getTodayDate();
+        /*
         if('{{session("username")}}' == "phaith" || '{{session("username")}}' == "yltest" || '{{session("username")}}' == "ocean"){
             that.dataset.schema.fields.osubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.otax.field_show_on_form = false ;
@@ -58,9 +59,10 @@
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
-        }
+        }*/
 	})
     window.injects.injectOnView.push((that, pageData, id) => {
+        /*
         if('{{session("username")}}' == "phaith" || '{{session("username")}}' == "yltest" || '{{session("username")}}' == "ocean"){
             that.dataset.schema.fields.osubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.otax.field_show_on_form = false ;
@@ -69,10 +71,11 @@
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
-        }
+        }*/
     })
     window.injects.injectOnEdit.push((that, pageData, id) => {
         that.dataset.status = 'update'
+        /*
         if('{{session("username")}}' == "phaith" || '{{session("username")}}' == "yltest" || '{{session("username")}}' == "ocean"){
             that.dataset.schema.fields.osubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.otax.field_show_on_form = false ;
@@ -81,7 +84,7 @@
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
-        }
+        }*/
         let subData = that.dataset.subData[bodyId1];
         for (let element of subData) {
             if (element.schema) {
@@ -96,6 +99,7 @@
     })
     window.injects.injectOnCopy.push((that, pageData, id) => {
         let subData = that.dataset.subData[bodyId1];
+        /*
         if('{{session("username")}}' == "phaith" || '{{session("username")}}' == "yltest" || '{{session("username")}}' == "ocean"){
             that.dataset.schema.fields.osubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.otax.field_show_on_form = false ;
@@ -104,7 +108,7 @@
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
-        }
+        }*/
         for (let element of subData) {
             if (element.schema) {
                 if( element.data.receive_code != null ){

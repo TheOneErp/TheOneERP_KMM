@@ -51,6 +51,7 @@
 		formVue.dataset.data.undertakername = '{{session("user_name")}}';
         that.dataset.data.advanceday = getTodayDate();
         that.dataset.data.undertakerday = getTodayDate();
+		/*
         if('{{session("username")}}' == "phaith" || '{{session("username")}}' == "yltest" || '{{session("username")}}' == "ocean"){
             that.dataset.schema.fields.osubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.otax.field_show_on_form = false ;
@@ -59,10 +60,11 @@
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
-        }
+        }*/
 	})
     window.injects.injectOnView.push((that, pageData, id) => {
         viewstatus = true;
+		/*
         if('{{session("username")}}' == "phaith" || '{{session("username")}}' == "yltest" || '{{session("username")}}' == "ocean"){
             that.dataset.schema.fields.osubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.otax.field_show_on_form = false ;
@@ -71,11 +73,12 @@
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
-        }
+        }*/
     })
      window.injects.injectOnEdit.push((that, pageData, id) => {
         that.dataset.status = 'update';
         viewstatus = false;
+		/*
         if('{{session("username")}}' == "phaith" || '{{session("username")}}' == "yltest" || '{{session("username")}}' == "ocean"){
             that.dataset.schema.fields.osubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.otax.field_show_on_form = false ;
@@ -84,7 +87,7 @@
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
-        }
+        }*/
 		let subData = that.dataset.subData[bodyId1];
         let len = that.dataset.subData[bodyId1].length;
         let a1 =1;
@@ -127,6 +130,7 @@
 	})
     window.injects.injectOnCopy.push((that, pageData, id) => {
         viewstatus = true;
+		/*
         if('{{session("username")}}' == "phaith" || '{{session("username")}}' == "yltest" || '{{session("username")}}' == "ocean"){
             that.dataset.schema.fields.osubtotal.field_show_on_form = false ;
             that.dataset.schema.fields.otax.field_show_on_form = false ;
@@ -135,7 +139,7 @@
             that.dataset.schema.fields.stax.field_show_on_form = false ;
             that.dataset.schema.fields.stotal.field_show_on_form = false ;
             that.dataset.subData[bodyId1][0].schema.fields.body_subtotal.field_show_on_form = false ;
-        }
+        }*/
         let subData = that.dataset.subData[bodyId1];
 		for (let element of subData) {
 			element.data.body_quantity = 0;
