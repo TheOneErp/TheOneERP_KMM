@@ -77,7 +77,7 @@ class CA202Controller extends Controller{
         else
             abort(400);
 		// dd($data);
-		/**判斷是否需要審核 */
+		//判斷是否需要審核
 		$vPageId = 77;
 		$prefix = 'AA202_30';
 		$vtable = DB::table($prefix);
@@ -103,7 +103,7 @@ class CA202Controller extends Controller{
         else
             abort(400);
 		// dd($data);
-		/**判斷是否需要審核 */
+		//判斷是否需要審核 
 		$vPageId = 77;
 		// $prefix = 'BA103_82';
 		// $vtable = DB::table($prefix);

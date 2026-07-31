@@ -48,6 +48,15 @@
 	const batchPageId = 2072;
     let isview = false;
 
+    document.addEventListener('submit', function(e){
+    e.preventDefault();
+    let form = e.target;
+    let searchBtn = form.querySelector('button.ts.primary.button');
+    if( searchBtn && searchBtn.textContent.trim() === '搜尋' ){
+        searchBtn.click();
+    }
+}, true);
+
     window.injects.injectOnInit.push((that, pageData) => {
 
 	})
