@@ -48,6 +48,7 @@
 	const batchPageId = 2072;
     let isview = false;
 
+    //防止在多產品取回中的搜尋欄按下enter會重新整理整個頁面
     document.addEventListener('submit', function(e){
     e.preventDefault();
     let form = e.target;

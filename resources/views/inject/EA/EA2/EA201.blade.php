@@ -36,10 +36,20 @@
 
 @section("form_after_script")
 <script>
-	const bodyId1 = 51;
+const bodyId1 = 51;
 const littlePageId2 = 6279;
 const littlePageIdBodyFormID2 = 6262;
     
+    //防止在多產品取回中的搜尋欄按下enter會重新整理整個頁面
+    document.addEventListener('submit', function(e){
+    e.preventDefault();
+    let form = e.target;
+    let searchBtn = form.querySelector('button.ts.primary.button');
+    if( searchBtn && searchBtn.textContent.trim() === '搜尋' ){
+        searchBtn.click();
+    }
+}, true);
+	
     window.injects.injectOnInit.push((that, pageData) => {
 		
 	})
