@@ -161,6 +161,10 @@ class EA301 extends InjectBase
     // Save
     static public function beforeSave(&$data, &$pageData)
     {
+        if (isset($data['data']['today_num']) && $data['data']['today_num'] === '') {
+            $data['data']['today_num'] = null;
+        }
+        
         $pageId = $pageData['page']['page_id'];
 		if( array_key_exists('ship_code',$data['data']) ){
 			$number = CommonController::generateDocumentNumber($pageId,'ship_code',$data['data']['ship_code']);
