@@ -363,14 +363,14 @@
 				<textFieldExpression><![CDATA[$F{company_fax}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="241" y="128" width="121" height="16" uuid="e9a8b1a6-2538-48ba-bcfe-5a7417706152"/>
+				<reportElement x="269" y="128" width="121" height="16" uuid="e9a8b1a6-2538-48ba-bcfe-5a7417706152"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="0810font"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{uniform_num}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="181" y="128" width="60" height="16" uuid="59e87ccc-3c39-4a12-8c06-7e9d3952f7ec"/>
+				<reportElement x="209" y="128" width="60" height="16" uuid="59e87ccc-3c39-4a12-8c06-7e9d3952f7ec"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -383,7 +383,7 @@
 				<text><![CDATA[客戶統編 : ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="362" y="129" width="60" height="16" uuid="e5f06e42-9871-435d-a15c-25332f4cd0ae"/>
+				<reportElement x="404" y="128" width="60" height="16" uuid="e5f06e42-9871-435d-a15c-25332f4cd0ae"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -396,7 +396,7 @@
 				<text><![CDATA[客戶傳真 : ]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="422" y="129" width="121" height="16" uuid="a4d3364a-edb0-45ff-8912-bc3784b26c39"/>
+				<reportElement x="464" y="128" width="115" height="16" uuid="a4d3364a-edb0-45ff-8912-bc3784b26c39"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="0810font"/>
 				</textElement>
