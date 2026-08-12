@@ -46,13 +46,18 @@ let machiningCodeEmpty = true ; //有空的
 const littlePageId2 = 5248;
 const littlePageIdBodyFormID2 = 5225;
 
-    //防止在多產品取回中的搜尋欄按下enter會重新整理整個頁面
-    document.addEventListener('submit', function(e){
-    e.preventDefault();
-    let form = e.target;
-    let searchBtn = form.querySelector('button.ts.primary.button');
-    if( searchBtn && searchBtn.textContent.trim() === '搜尋' ){
-        searchBtn.click();
+    //防止表單欄位按下enter造成瀏覽器「隱式送出」，進而誤觸表單內第一個按鈕(例如取回小視窗的圖示按鈕)跳出視窗
+    //改在keydown階段就攔截並阻止預設行為，只有在該欄位所屬表單內確實存在"搜尋"按鈕(多產品取回小視窗)時才代為觸發
+    document.addEventListener('keydown', function(e){
+    if( e.key === 'Enter' && e.target.tagName === 'INPUT' ){
+        let form = e.target.closest('form');
+        if( form ){
+            e.preventDefault();
+            let searchBtn = form.querySelector('button.ts.primary.button');
+            if( searchBtn && searchBtn.textContent.trim() === '搜尋' ){
+                searchBtn.click();
+            }
+        }
     }
 }, true);
 
@@ -224,7 +229,7 @@ window.injects.injectOnReferenceWrite.push((that, pageData, fromField, data, fie
 
 			formVue.dataset.subData[bodyId1].forEach(function(item) {
 				if(item.data.product_code != null){
-				formVue.$set(item.override.fields, 'payment_status', { field_readonly: formVue.dataset.data.yn_cnt_cust == 1 });
+				formVue.$set(item.override.fields, 'payment_status', { field_readonly: true });
 				if (formVue.dataset.data.yn_cnt_cust == 1) {
 			formVue.$set(item.data, 'payment_status', '已收款');
 			}
@@ -469,7 +474,7 @@ window.injects.injectOnHeadClick.push((that, pageData, field, dataset) => {
 
 			formVue.dataset.subData[bodyId1].forEach(function(item) {
 				if(item.data.product_code != null){
-				formVue.$set(item.override.fields, 'payment_status', { field_readonly: formVue.dataset.data.yn_cnt_cust == 1 });
+				formVue.$set(item.override.fields, 'payment_status', { field_readonly: true });
 				if (formVue.dataset.data.yn_cnt_cust == 1) {
 			formVue.$set(item.data, 'payment_status', '已收款');
 			}
@@ -502,7 +507,7 @@ window.injects.injectOnBodyChange.push((that, pageData, parentDataset, row, fiel
 				let subData = that.dataset.subData[bodyId1];
 
 formVue.dataset.subData[bodyId1].forEach(function(item) {
-    formVue.$set(item.override.fields, 'payment_status', { field_readonly: formVue.dataset.data.yn_cnt_cust == 1 });
+    formVue.$set(item.override.fields, 'payment_status', { field_readonly: true });
 });
 	//	console.log(filedCode);
 	
@@ -547,7 +552,7 @@ formVue.dataset.subData[bodyId1].forEach(function(item) {
 				
 
 			formVue.dataset.subData[bodyId1].forEach(function(item) {
-				formVue.$set(item.override.fields, 'payment_status', { field_readonly: formVue.dataset.data.yn_cnt_cust == 1 });
+				formVue.$set(item.override.fields, 'payment_status', { field_readonly: true });
 				if (formVue.dataset.data.yn_cnt_cust == 1) {
 			formVue.$set(item.data, 'payment_status', '已收款');
 			}

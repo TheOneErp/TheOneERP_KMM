@@ -41,6 +41,19 @@
     const littlePageId = 73;
     const littlePageIdBodyFormID = 78;
 
+    //防止表單欄位按下enter造成瀏覽器「隱式送出」，進而誤觸表單內第一個按鈕(例如取回小視窗的圖示按鈕)跳出視窗
+    document.addEventListener('keydown', function(e){
+    if( e.key === 'Enter' && e.target.tagName === 'INPUT' ){
+        let form = e.target.closest('form');
+        if( form ){
+            e.preventDefault();
+            let searchBtn = form.querySelector('button.ts.primary.button');
+            if( searchBtn && searchBtn.textContent.trim() === '搜尋' ){
+                searchBtn.click();
+            }
+        }
+    }
+}, true);
 
     window.injects.injectOnInit.push((that, pageData) => {
 
