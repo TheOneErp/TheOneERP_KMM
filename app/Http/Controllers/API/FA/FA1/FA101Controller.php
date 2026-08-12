@@ -148,6 +148,7 @@ class FA101Controller extends Controller{
             $row->ship_day = '';
             $row->ship_light = null;
             $row->ship_backstatus = false;
+            $row->undelvd_num = number_format((float)$row->body_num - (float)$row->body_quantity, 2);
             $sumproduct = $ddopt->where('product_code',$row->product_code)->pluck('total')->first();
             $orderproduct = $oorder->where('b.product_code',$row->product_code)->pluck('remain_num')->first();
             $total = (float)$sumproduct - (float)$orderproduct;

@@ -278,6 +278,7 @@ function checkBucketExist(data,buketNum=null){
 				formVue.dataset.data.ssubtotal = ototalprice;
 				formVue.dataset.data.stax =ototaltax;
 				formVue.dataset.data.stotal = parseFloat(ototalprice+ototaltax).toFixed(0);
+				formVue.dataset.data.amt_outstanding = formVue.dataset.data.stotal;
                 formVue.dataset.data.final_pmt=parseFloat(Number(totalprice)+Number(totaltax)).toFixed(0);
 
         }
@@ -520,6 +521,7 @@ function checkBucketExist(data,buketNum=null){
 					osubtotal = countSubtotal2(dataset,subDataArray,parentDataset,"body_subtotal","body_num","o_body_price","osubtotal","discount",dataPrice)
 					countOriginal(osubtotal,parentDataset,"osubtotal","otax","ototal",taxrate,bodyId1,"body_subtotal");
 					countStandard(osubtotal,parentDataset,rate,"ssubtotal","stax","stotal","otax","ototal");
+					parentDataset.data.amt_outstanding = parentDataset.data.stotal;
 
 				});
 				// storeNumRecord();
@@ -528,7 +530,9 @@ function checkBucketExist(data,buketNum=null){
 				let rate = data.currency_exchrate; //匯率
 				let osubtotal = dataset.data.osubtotal;
 				//console.log(rate);
+				dataset.data.rate = rate; //把匯率存回表頭rate欄位，讓後續表身異動的本位幣重算能取得正確匯率
 				countStandard(osubtotal,dataset,rate,"ssubtotal","stax","stotal","otax","ototal");
+				dataset.data.amt_outstanding = dataset.data.stotal;
 				//console.log(data);
 				for (let element of dataset.subData[bodyId1]) {
 
@@ -657,6 +661,7 @@ function checkBucketExist(data,buketNum=null){
 				formVue.dataset.data.ssubtotal = parseFloat(ototalprice).toFixed(2);
 				formVue.dataset.data.stax =parseFloat(ototaltax).toFixed(2);
 				formVue.dataset.data.stotal = parseFloat(ototalprice+ototaltax).toFixed(0);
+				formVue.dataset.data.amt_outstanding = formVue.dataset.data.stotal;
                 formVue.dataset.data.final_pmt = parseFloat(Number(totalprice)+Number(totaltax)).toFixed(0);
 		}
 		else if( fromField.field_code == "b_currency" ){
@@ -737,6 +742,7 @@ function checkBucketExist(data,buketNum=null){
 				formVue.dataset.data.ssubtotal = ototalprice;
 				formVue.dataset.data.stax =ototaltax;
 				formVue.dataset.data.stotal = parseFloat(ototalprice+ototaltax).toFixed(0);
+				formVue.dataset.data.amt_outstanding = formVue.dataset.data.stotal;
 			//console.log(sum);
 		}
 
@@ -754,6 +760,7 @@ function checkBucketExist(data,buketNum=null){
 				osubtotal = countSubtotal2(dataset,subDataArray,parentDataset,"body_subtotal","body_num","o_body_price","osubtotal",dataPrice)
 				countOriginal(osubtotal,parentDataset,"osubtotal","otax","ototal",taxrate,bodyId1,"body_subtotal");
 				countStandard(osubtotal,parentDataset,rate,"ssubtotal","stax","stotal","otax","ototal");
+				parentDataset.data.amt_outstanding = parentDataset.data.stotal;
                 formVue.dataset.data.final_pmt = parseFloat(Number(formVue.dataset.data.ototal)).toFixed(2);
 //				const rowRum = dataset.data.body_num * dataset.data.body_rate;
 //				bodyNumRecord[index] = rowRum;
@@ -822,6 +829,7 @@ function checkBucketExist(data,buketNum=null){
 					osubtotal = countSubtotal(dataset,subDataArray,parentDataset,"body_subtotal","body_num","o_body_price","osubtotal",dataPrice)
 					countOriginal(osubtotal,parentDataset,"osubtotal","otax","ototal",taxrate,bodyId1,"body_subtotal");
 					countStandard(osubtotal,parentDataset,rate,"ssubtotal","stax","stotal","otax","ototal");
+					parentDataset.data.amt_outstanding = parentDataset.data.stotal;
 				}else{
 					if( theSame == 1 ){
 						for (let key in data) {
@@ -882,6 +890,7 @@ function checkBucketExist(data,buketNum=null){
 				formVue.dataset.data.ssubtotal = parseFloat(formVue.dataset.data.osubtotal * rate).toFixed(2);
 				formVue.dataset.data.stax =  parseFloat(formVue.dataset.data.otax * rate).toFixed(2);
 				formVue.dataset.data.stotal = parseFloat(formVue.dataset.data.ototal * rate).toFixed(0);
+				formVue.dataset.data.amt_outstanding = formVue.dataset.data.stotal;
 
 		}
 
@@ -901,8 +910,10 @@ function checkBucketExist(data,buketNum=null){
 			if( filedCode == "taxrate" ){
 				countOriginal(osubtotal,dataset,"osubtotal","otax","ototal",taxrate,bodyId1,"body_subtotal");
 				countStandard(osubtotal,dataset,rate,"ssubtotal","stax","stotal","otax","ototal");
+				dataset.data.amt_outstanding = dataset.data.stotal;
 			}else if( filedCode == "rate" ){
 				countStandard(osubtotal,dataset,rate,"ssubtotal","stax","stotal","otax","ototal");
+				dataset.data.amt_outstanding = dataset.data.stotal;
 			}else if( filedCode == "keg" ){
 				if( dataset.data.keg ){
 					let bucketData = {
@@ -977,6 +988,7 @@ function checkBucketExist(data,buketNum=null){
 							kegStatus = 0;
 							countOriginal(osubtotal,dataset,"osubtotal","otax","ototal",taxrate,bodyId1,"body_subtotal");
 			   				countStandard(osubtotal,dataset,rate,"ssubtotal","stax","stotal","otax","ototal");
+							dataset.data.amt_outstanding = dataset.data.stotal;
 						}else{
 							alert(result['text']);
 						}
@@ -1137,6 +1149,7 @@ function checkBucketExist(data,buketNum=null){
 				formVue.dataset.data.ssubtotal = ototalprice;
 				formVue.dataset.data.stax =ototaltax;
 				formVue.dataset.data.stotal = parseFloat(ototalprice+ototaltax).toFixed(0);
+				formVue.dataset.data.amt_outstanding = formVue.dataset.data.stotal;
                 formVue.dataset.data.final_pmt = parseFloat(Number(totalprice)+Number(totaltax)).toFixed(0);
 				if( getBackStatus ){
 				   alert("取回完成");
@@ -1208,6 +1221,62 @@ function checkBucketExist(data,buketNum=null){
 					}
 			   }
 
+			   let bodytotal= 0;
+				 let bodytaxrate= 0;
+				 let oSubtotal= 0;
+				 let totalprice = 0;
+				 let totaltax = 0;
+				 let orate = 0;
+				 let ototalprice =0;
+				 let ototaltax =0;
+
+				 for(i=0;i<=formVue.dataset.subData[bodyId1].length-1;i++) {
+					if( formVue.dataset.subData[bodyId1][i].data.product_code ){
+						formVue.dataset.subData[bodyId1][i].data.body_subtotal=parseFloat((formVue.dataset.subData[bodyId1][i].data.o_body_price * formVue.dataset.subData[bodyId1][i].data.discount)/100).toFixed(2);
+						formVue.dataset.subData[bodyId1][i].data.body_subtotal=parseFloat(formVue.dataset.subData[bodyId1][i].data.body_subtotal * formVue.dataset.subData[bodyId1][i].data.body_num).toFixed(2);
+						if(formVue.dataset.subData[bodyId1][i].data.b_tax == "稅外加"){
+							bodytotal = parseFloat(formVue.dataset.subData[bodyId1][i].data.body_subtotal,10).toFixed(2);
+							bodytotal = parseFloat(bodytotal);
+							bodytaxrate = formVue.dataset.subData[bodyId1][i].data.b_taxrate;
+							bodytax = bodytotal *bodytaxrate;
+							bodycurrency = formVue.dataset.data.rate;
+							totalprice = totalprice+bodytotal;
+							totaltax = totaltax+bodytax;
+							ototalprice = ototalprice + (bodytotal*(bodycurrency))
+							ototaltax = ototaltax + (bodytax*(bodycurrency))
+						}else if(formVue.dataset.subData[bodyId1][i].data.b_tax == "稅內含"){
+							bodytaxrate = formVue.dataset.subData[bodyId1][i].data.b_taxrate;
+							bodytotal = parseFloat(formVue.dataset.subData[bodyId1][i].data.body_subtotal).toFixed(2);
+							bodytotal = parseFloat(bodytotal);
+							bodytotal2 = parseFloat(bodytotal/(1+bodytaxrate)).toFixed(2);
+							bodytotal2 = parseFloat(bodytotal2);
+							bodytax= parseFloat(bodytotal-(bodytotal/(1+bodytaxrate))).toFixed(2);
+							bodytax= parseFloat(bodytax);
+							bodycurrency = formVue.dataset.data.rate;
+							totalprice = totalprice + bodytotal2;
+							totaltax = totaltax + bodytax;
+							ototalprice = ototalprice + (bodytotal2*bodycurrency)
+							ototaltax = ototaltax + (bodytax*bodycurrency)
+						}else{
+							bodytotal = Number(formVue.dataset.subData[bodyId1][i].data.body_subtotal);
+							bodytax = 0;
+							bodycurrency = formVue.dataset.data.rate;
+							totalprice = totalprice + bodytotal;
+							totaltax = totaltax + bodytax;
+							ototalprice = ototalprice + (bodytotal*bodycurrency)
+							ototaltax = ototaltax + (bodytax*bodycurrency)
+						}
+					}
+				}
+				gettotal=parseFloat(totalprice).toFixed(2);
+				formVue.dataset.data.osubtotal = gettotal;
+				formVue.dataset.data.otax = totaltax;
+				formVue.dataset.data.ototal =parseFloat(totalprice+totaltax).toFixed(0);
+				formVue.dataset.data.ssubtotal = ototalprice;
+				formVue.dataset.data.stax =ototaltax;
+				formVue.dataset.data.stotal = parseFloat(ototalprice+ototaltax).toFixed(0);
+				formVue.dataset.data.amt_outstanding = formVue.dataset.data.stotal;
+				formVue.dataset.data.final_pmt = parseFloat(Number(totalprice)+Number(totaltax)).toFixed(0);
 
 				if( getBackStatus ){
 				   alert("取回完成");
@@ -1278,6 +1347,62 @@ function checkBucketExist(data,buketNum=null){
 					}
 			   }
 
+			   let bodytotal= 0;
+				 let bodytaxrate= 0;
+				 let oSubtotal= 0;
+				 let totalprice = 0;
+				 let totaltax = 0;
+				 let orate = 0;
+				 let ototalprice =0;
+				 let ototaltax =0;
+
+				 for(i=0;i<=formVue.dataset.subData[bodyId1].length-1;i++) {
+					if( formVue.dataset.subData[bodyId1][i].data.product_code ){
+						formVue.dataset.subData[bodyId1][i].data.body_subtotal=parseFloat((formVue.dataset.subData[bodyId1][i].data.o_body_price * formVue.dataset.subData[bodyId1][i].data.discount)/100).toFixed(2);
+						formVue.dataset.subData[bodyId1][i].data.body_subtotal=parseFloat(formVue.dataset.subData[bodyId1][i].data.body_subtotal * formVue.dataset.subData[bodyId1][i].data.body_num).toFixed(2);
+						if(formVue.dataset.subData[bodyId1][i].data.b_tax == "稅外加"){
+							bodytotal = parseFloat(formVue.dataset.subData[bodyId1][i].data.body_subtotal,10).toFixed(2);
+							bodytotal = parseFloat(bodytotal);
+							bodytaxrate = formVue.dataset.subData[bodyId1][i].data.b_taxrate;
+							bodytax = bodytotal *bodytaxrate;
+							bodycurrency = formVue.dataset.data.rate;
+							totalprice = totalprice+bodytotal;
+							totaltax = totaltax+bodytax;
+							ototalprice = ototalprice + (bodytotal*(bodycurrency))
+							ototaltax = ototaltax + (bodytax*(bodycurrency))
+						}else if(formVue.dataset.subData[bodyId1][i].data.b_tax == "稅內含"){
+							bodytaxrate = formVue.dataset.subData[bodyId1][i].data.b_taxrate;
+							bodytotal = parseFloat(formVue.dataset.subData[bodyId1][i].data.body_subtotal).toFixed(2);
+							bodytotal = parseFloat(bodytotal);
+							bodytotal2 = parseFloat(bodytotal/(1+bodytaxrate)).toFixed(2);
+							bodytotal2 = parseFloat(bodytotal2);
+							bodytax= parseFloat(bodytotal-(bodytotal/(1+bodytaxrate))).toFixed(2);
+							bodytax= parseFloat(bodytax);
+							bodycurrency = formVue.dataset.data.rate;
+							totalprice = totalprice + bodytotal2;
+							totaltax = totaltax + bodytax;
+							ototalprice = ototalprice + (bodytotal2*bodycurrency)
+							ototaltax = ototaltax + (bodytax*bodycurrency)
+						}else{
+							bodytotal = Number(formVue.dataset.subData[bodyId1][i].data.body_subtotal);
+							bodytax = 0;
+							bodycurrency = formVue.dataset.data.rate;
+							totalprice = totalprice + bodytotal;
+							totaltax = totaltax + bodytax;
+							ototalprice = ototalprice + (bodytotal*bodycurrency)
+							ototaltax = ototaltax + (bodytax*bodycurrency)
+						}
+					}
+				}
+				gettotal=parseFloat(totalprice).toFixed(2);
+				formVue.dataset.data.osubtotal = gettotal;
+				formVue.dataset.data.otax = totaltax;
+				formVue.dataset.data.ototal =parseFloat(totalprice+totaltax).toFixed(0);
+				formVue.dataset.data.ssubtotal = ototalprice;
+				formVue.dataset.data.stax =ototaltax;
+				formVue.dataset.data.stotal = parseFloat(ototalprice+ototaltax).toFixed(0);
+				formVue.dataset.data.amt_outstanding = formVue.dataset.data.stotal;
+				formVue.dataset.data.final_pmt = parseFloat(Number(totalprice)+Number(totaltax)).toFixed(0);
 
 				if( getBackStatus ){
 				   alert("取回完成");
@@ -1423,6 +1548,7 @@ function checkBucketExist(data,buketNum=null){
 					formVue.dataset.data.ssubtotal = parseFloat(ototalprice).toFixed(2);
 					formVue.dataset.data.stax =parseFloat(ototaltax).toFixed(2);
 					formVue.dataset.data.stotal = parseFloat(ototalprice+ototaltax).toFixed(0);
+				formVue.dataset.data.amt_outstanding = formVue.dataset.data.stotal;
                     formVue.dataset.data.final_pmt = parseFloat(Number(totalprice)+Number(totaltax)).toFixed(0);
 					formVue.dataset.data.amt_recd = 0;
 					formVue.dataset.data.amt_outstanding = formVue.dataset.data.stotal;
@@ -1506,6 +1632,7 @@ function checkBucketExist(data,buketNum=null){
 				formVue.dataset.data.ssubtotal = ototalprice;
 				formVue.dataset.data.stax =ototaltax;
 				formVue.dataset.data.stotal = parseFloat(ototalprice+ototaltax).toFixed(0);
+				formVue.dataset.data.amt_outstanding = formVue.dataset.data.stotal;
                 formVue.dataset.data.final_pmt = parseFloat(Number(totalprice)+Number(totaltax)).toFixed(0);
 		}
 		else if(filedCode == "b_rate" ){
@@ -1577,6 +1704,7 @@ function checkBucketExist(data,buketNum=null){
 				formVue.dataset.data.ssubtotal = ototalprice;
 				formVue.dataset.data.stax =ototaltax;
 				formVue.dataset.data.stotal = parseFloat(ototalprice+ototaltax).toFixed(0);
+				formVue.dataset.data.amt_outstanding = formVue.dataset.data.stotal;
                 formVue.dataset.data.final_pmt = parseFloat(Number(totalprice)+Number(totaltax)).toFixed(0);
 		}
 
