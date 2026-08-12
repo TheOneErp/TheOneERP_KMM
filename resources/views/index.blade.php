@@ -192,7 +192,7 @@ var calendar = $('#calendar').fullCalendar({
 	events:'getcal',
 	//eventColor: '#009FCC',
 	//eventTextColor : '#ffffff',
-	nextDayThreshold: '06:00:00',
+	nextDayThreshold: '00:00:00',
 
 	displayEventEnd:true,
 	displayEventTime: false,
