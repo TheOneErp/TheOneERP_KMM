@@ -168,12 +168,9 @@ class BA208 extends InjectBase
 
                         $amt_recd = $HeadData->amt_recd - $value['data']['paid'] ;
                         $amt_discount = $HeadData->amt_discount - $value['data']['amt_discount'];
-                        $amt_outstanding = $HeadData->ototal - ($HeadData->amt_recd - $value['data']['paid']) - ($HeadData->amt_discount - $value['data']['amt_discount']);
-    
 
                         if($checkData == 0){
                             $h_pmt_date = null;
-                            $amt_outstanding = 0;
                             if($amt_discount == 0){
                                 $amt_discount = null;
                             }
@@ -181,11 +178,14 @@ class BA208 extends InjectBase
                             $h_pmt_date = $BA208data->h_pmt_date;
                         }
 
+                        //刪除沖帳紀錄後，未收金額要以還原後的已收金額/折讓金額重新計算，而不是直接歸0
+                        $amt_outstanding = $HeadData->ototal - $amt_recd - ($amt_discount ?? 0);
+
                         DB::table("BA202_52")
                             ->where('ship_code', '=', $row)
                             ->update([
-                                'h_pmt_date' => null,
-                                'amt_recd' => $amt_recd,     
+                                'h_pmt_date' => $h_pmt_date,
+                                'amt_recd' => $amt_recd,
                                 'amt_discount' => $amt_discount,
                                 'amt_outstanding' => $amt_outstanding,
                             ]);
