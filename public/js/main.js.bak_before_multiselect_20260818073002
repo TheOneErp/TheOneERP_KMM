@@ -579,22 +579,7 @@ Vue.component('universal-reference', {
                             </div>
                         </div>
 
-                        <template v-if="field.field_options.reference.type == 'multiple'">
-                        <div class="content">
-                                <div>
-                                    <button class="ts small button" @click.prevent="selectAll">
-                                        <i class="check square icon"></i> 全選
-                                    </button>
-                                    <button class="ts small button" @click.prevent="deselectAll">
-                                        <i class="square outline icon"></i> 全不選
-                                    </button>
-                                </div><br>
-                                
-                                <button class="ts large info button" @click.prevent="referenceChoose">
-                                    <i class="check circle icon"></i> 挑選
-                                </button>
-                            </div>
-                        </template>
+                        <br>
                         <table class="ts sortable selectable stackable celled striped padded table" id="list" style="padding:1em;">
                             <thead>
                                 <tr>
@@ -630,6 +615,11 @@ Vue.component('universal-reference', {
                         </table>
                         <br>
 
+                        <template v-if="field.field_options.reference.type == 'multiple'">
+                            <div class="ts inverted segment" style="background:none;border-style:none;">
+                                <button class="ts info button" @click.prevent="referenceChoose">挑選</button>
+                            </div>
+                        </template>
                     </dialog>
                 </div>
             </div>
@@ -738,22 +728,7 @@ Vue.component('universal-reference', {
                 this.$emit("reference", this.getEmptyData(), this.referenceData.fields)
             }
         },
-        selectAll() {
-        if (this.referenceData.data && this.referenceData.data.datas) {
-            this.referenceData.data.datas.forEach(item => {
-                item.isChecked = true;
-            });
-        }
-        },
 
-        // 全不選
-        deselectAll() {
-            if (this.referenceData.data && this.referenceData.data.datas) {
-                this.referenceData.data.datas.forEach(item => {
-                    item.isChecked = false;
-                });
-            }
-        },
         openModal() {
             ts("#" + this.randomID).modal({
                 approve: '.不可能存在的按鈕',

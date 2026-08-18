@@ -232,7 +232,7 @@ class BA202Controller extends Controller{
     ->whereNotNull('b.combi_code');
 		$client_code = $reportData->pluck('client_code')->first();
 		$customData = DB::table('BA102_37 as a')
-		->select(DB::raw("a.client_code,a.client_name,a.cnt_balance,a.yn_cnt_cust,a.uniform_num,b.phone,c.addr,a.client_cat") )
+		->select(DB::raw("a.client_code,a.client_name,a.cnt_balance,a.yn_cnt_cust,a.uniform_num,b.phone,b.contact,c.addr,a.client_cat") )
 		->leftJoin('BA102_38 as b', 'b.parent_id','=','a.id')
 		->leftJoin('BA102_39 as c', 'c.parent_id','=','a.id')
 		->where('client_code','=',$client_code)
@@ -256,6 +256,7 @@ class BA202Controller extends Controller{
 
             foreach($reportData as $key=>$row ){
                 $row->phone = $customData->phone;
+                $row->contact = $customData->contact;
                 $row->addr = $customData->addr;
 				$row->client_cat = $customData->client_cat;
                 $row->uniform_num = $customData->uniform_num;
@@ -272,6 +273,7 @@ class BA202Controller extends Controller{
 		}else{
             foreach($reportData as $key=>$row ){
                 $row->phone = $customData->phone;
+                $row->contact = $customData->contact;
                 $row->addr = $customData->addr;
 				$row->client_cat = $customData->client_cat;
                 $row->uniform_num = $customData->uniform_num;
@@ -338,7 +340,7 @@ class BA202Controller extends Controller{
     ->whereNotNull('b.combi_code');
 		$client_code = $reportData->pluck('client_code')->first();
 		$customData = DB::table('BA102_37 as a')
-		->select(DB::raw("a.client_code,a.client_name,a.cnt_balance,a.yn_cnt_cust,a.uniform_num,b.phone,c.addr,a.client_cat") )
+		->select(DB::raw("a.client_code,a.client_name,a.cnt_balance,a.yn_cnt_cust,a.uniform_num,b.phone,b.contact,c.addr,a.client_cat") )
 		->leftJoin('BA102_38 as b', 'b.parent_id','=','a.id')
 		->leftJoin('BA102_39 as c', 'c.parent_id','=','a.id')
 		->where('client_code','=',$client_code)
@@ -362,6 +364,7 @@ class BA202Controller extends Controller{
 
             foreach($reportData as $key=>$row ){
                 $row->phone = $customData->phone;
+                $row->contact = $customData->contact;
                 $row->addr = $customData->addr;
 				$row->client_cat = $customData->client_cat;
                 $row->uniform_num = $customData->uniform_num;
@@ -378,6 +381,7 @@ class BA202Controller extends Controller{
 		}else{
             foreach($reportData as $key=>$row ){
                 $row->phone = $customData->phone;
+                $row->contact = $customData->contact;
                 $row->addr = $customData->addr;
 				$row->client_cat = $customData->client_cat;
                 $row->uniform_num = $customData->uniform_num;
@@ -444,7 +448,7 @@ class BA202Controller extends Controller{
     ->whereNotNull('b.combi_code');
 		$client_code = $reportData->pluck('client_code')->first();
 		$customData = DB::table('BA102_37 as a')
-		->select(DB::raw("a.client_code,a.client_name,a.cnt_balance,a.yn_cnt_cust,a.uniform_num,b.phone,c.addr,a.client_cat") )
+		->select(DB::raw("a.client_code,a.client_name,a.cnt_balance,a.yn_cnt_cust,a.uniform_num,b.phone,b.contact,c.addr,a.client_cat") )
 		->leftJoin('BA102_38 as b', 'b.parent_id','=','a.id')
 		->leftJoin('BA102_39 as c', 'c.parent_id','=','a.id')
 		->where('client_code','=',$client_code)
@@ -469,6 +473,7 @@ class BA202Controller extends Controller{
 
             foreach($reportData as $key=>$row ){
                 $row->phone = $customData->phone;
+                $row->contact = $customData->contact;
                 $row->addr = $customData->addr;
 				$row->client_cat = $customData->client_cat;
                 $row->uniform_num = $customData->uniform_num;
@@ -485,6 +490,7 @@ class BA202Controller extends Controller{
 		}else{
             foreach($reportData as $key=>$row ){
                 $row->phone = $customData->phone;
+                $row->contact = $customData->contact;
                 $row->addr = $customData->addr;
 				$row->client_cat = $customData->client_cat;
                 $row->uniform_num = $customData->uniform_num;

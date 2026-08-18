@@ -20,28 +20,29 @@
 	<field name="ssubtotal" class="java.math.BigDecimal"/>
 	<field name="stax" class="java.math.BigDecimal"/>
 	<field name="stotal" class="java.math.BigDecimal"/>
+	<field name="body_subtotal" class="java.math.BigDecimal"/>
 	<field name="h_remarks" class="java.lang.String"/>
 	<field name="payment_status" class="java.lang.String"/>
 	<field name="s_undertakerday" class="java.lang.String"/>
 	<field name="e_undertakerday" class="java.lang.String"/>
 	<field name="user" class="java.lang.String"/>
 	<variable name="group_subtotal" class="java.math.BigDecimal" resetType="Group" resetGroup="ClientGroup" calculation="Sum">
-		<variableExpression><![CDATA[$F{ssubtotal}]]></variableExpression>
+		<variableExpression><![CDATA[$F{body_subtotal}]]></variableExpression>
 	</variable>
 	<variable name="group_tax" class="java.math.BigDecimal" resetType="Group" resetGroup="ClientGroup" calculation="Sum">
 		<variableExpression><![CDATA[$F{stax}]]></variableExpression>
 	</variable>
 	<variable name="group_total" class="java.math.BigDecimal" resetType="Group" resetGroup="ClientGroup" calculation="Sum">
-		<variableExpression><![CDATA[$F{stotal}]]></variableExpression>
+		<variableExpression><![CDATA[$F{body_subtotal} + $F{stax}]]></variableExpression>
 	</variable>
 	<variable name="total_subtotal" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{ssubtotal}]]></variableExpression>
+		<variableExpression><![CDATA[$F{body_subtotal}]]></variableExpression>
 	</variable>
 	<variable name="total_tax" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{stax}]]></variableExpression>
 	</variable>
 	<variable name="total_total" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{stotal}]]></variableExpression>
+		<variableExpression><![CDATA[$F{body_subtotal} + $F{stax}]]></variableExpression>
 	</variable>
 	<group name="ClientGroup">
 		<groupExpression><![CDATA[$F{client_code}]]></groupExpression>
@@ -372,7 +373,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="0810font"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{ssubtotal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{body_subtotal}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.##" isBlankWhenNull="true">
 				<reportElement x="500" y="0" width="60" height="15" uuid="7ad3eb80-c806-419b-b498-d4eeb3eb2d0f"/>
@@ -386,7 +387,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="0810font"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{stotal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{body_subtotal} + $F{stax}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="630" y="0" width="112" height="15" uuid="b25336ff-2cb7-4c6d-8e83-220b8f5cf6e9"/>

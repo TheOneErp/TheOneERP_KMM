@@ -192,6 +192,7 @@ class PageController extends SystemController{
                 "page_code" => $pageData["page_code"],
                 "page_module" => $pageData["page_module"],
                 "page_visible" => $pageData["page_visible"],
+                "page_stay" => $pageData["page_stay"] ?? false,
                 "page_readonly" => $pageData["page_readonly"],
                 "page_form_template" => $pageData["page_form_template"],
                 "page_has_body" => sizeof($formData) > 1,
@@ -412,6 +413,8 @@ class PageController extends SystemController{
             }
         }
         $pageSetting["page_order"] = $pageSetting["page_visible"] ? $pageOrder : 0;
+
+        $to_create_page["page_stay"] = isset($pageSetting["page_stay"]) ? $pageSetting["page_stay"] : false;
 
         $pageToValidate = [];
         $page_rules = [];
@@ -1031,6 +1034,7 @@ class PageController extends SystemController{
                 "page_code" => $pageData["page_code"],
                 "page_module" => $pageData["page_module"],
                 "page_visible" => $pageData["page_visible"],
+                "page_stay" => $pageData["page_stay"] ?? false,
                 "page_readonly" => $pageData["page_readonly"],
                 "page_options" => $pageData["page_options"],
                 "page_remarks" => $pageData["page_remarks"]

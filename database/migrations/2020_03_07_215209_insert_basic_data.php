@@ -43,100 +43,100 @@ class InsertBasicData extends Migration
 
         // Add Pages
             $Page_SY = Page::create([
-                'page_code' => 'SY', 'page_module' => 0, 'page_list_template' => null, 'page_form_template' => null, 'page_order' => 0, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => '系統管理模組'
+                'page_code' => 'SY', 'page_module' => 0, 'page_list_template' => null, 'page_form_template' => null, 'page_order' => 0, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => '系統管理模組'
             ]);
 
             $Page_SY_USER_MANAGE = Page::create([
-                'page_code' => 'SY_USER_MANAGE', 'page_module' => $Page_SY->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => '用戶管理'
+                'page_code' => 'SY_USER_MANAGE', 'page_module' => $Page_SY->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => '用戶管理'
             ]);
             $Page_SY_USERS = Page::create([
-                'page_code' => 'SY_USERS', 'page_controller' => 'System\\Users\\UserController', 'page_module' => $Page_SY_USER_MANAGE->page_id, 'page_list_template' => 'system.list.users', 'page_form_template' => 'system.form.users', 'page_order' => 0, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => '用戶列表', 'page_options' => ['table' => 'users', 'primaryKey' => 'user_id']
+                'page_code' => 'SY_USERS', 'page_controller' => 'System\\Users\\UserController', 'page_module' => $Page_SY_USER_MANAGE->page_id, 'page_list_template' => 'system.list.users', 'page_form_template' => 'system.form.users', 'page_order' => 0, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => '用戶列表', 'page_options' => ['table' => 'users', 'primaryKey' => 'user_id']
             ]);
             $Page_SY_USER_AGENT = Page::create([
-                'page_code' => 'SY_USER_AGENT', 'page_controller' => '', 'page_module' => $Page_SY_USER_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null, 'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_remarks' => '用戶代理人', 'page_options' => ['table' => 'user_agent', 'primaryKey' => 'user_agent_id']
+                'page_code' => 'SY_USER_AGENT', 'page_controller' => '', 'page_module' => $Page_SY_USER_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null, 'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_stay' => false, 'page_remarks' => '用戶代理人', 'page_options' => ['table' => 'user_agent', 'primaryKey' => 'user_agent_id']
             ]);
             $Page_SY_USER_AGENT_PAGE = Page::create([
-                'page_code' => 'SY_USER_AGENT_PAGE', 'page_controller' => '', 'page_module' => $Page_SY_USER_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null, 'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_remarks' => '用戶代理人表身', 'page_options' => ['table' => 'user_agent_page', 'primaryKey' => 'user_agent_page_id']
+                'page_code' => 'SY_USER_AGENT_PAGE', 'page_controller' => '', 'page_module' => $Page_SY_USER_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null, 'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_stay' => false, 'page_remarks' => '用戶代理人表身', 'page_options' => ['table' => 'user_agent_page', 'primaryKey' => 'user_agent_page_id']
             ]);
             $Page_SY_GROUPS = Page::create([
-                'page_code' => 'SY_GROUPS', 'page_controller' => 'System\\Users\\GroupController', 'page_module' => $Page_SY_USER_MANAGE->page_id, 'page_list_template' => 'system.list.groups', 'page_form_template' => 'system.form.groups', 'page_order' => 1, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => '群組列表', 'page_options' => ['table' => 'groups', 'primaryKey' => 'group_id']
+                'page_code' => 'SY_GROUPS', 'page_controller' => 'System\\Users\\GroupController', 'page_module' => $Page_SY_USER_MANAGE->page_id, 'page_list_template' => 'system.list.groups', 'page_form_template' => 'system.form.groups', 'page_order' => 1, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => '群組列表', 'page_options' => ['table' => 'groups', 'primaryKey' => 'group_id']
             ]);
             $Page_SY_GROUP_USER = Page::create([
-                'page_code' => 'SY_GROUP_USER', 'page_controller' => 'System\\Users\\GroupUserController', 'page_module' => $Page_SY_USER_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_remarks' => '群組設定', 'page_options' => ['table' => 'group_user', 'primaryKey' => 'group_user_id']
+                'page_code' => 'SY_GROUP_USER', 'page_controller' => 'System\\Users\\GroupUserController', 'page_module' => $Page_SY_USER_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_stay' => false, 'page_remarks' => '群組設定', 'page_options' => ['table' => 'group_user', 'primaryKey' => 'group_user_id']
             ]);
             $Page_SY_PERMISSIONS = Page::create([
-                'page_code' => 'SY_PERMISSIONS', 'page_controller' => 'System\\Users\\PermissionController', 'page_module' => $Page_SY_USER_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_remarks' => '權限設定', 'page_options' => ['table' => 'permissions', 'primaryKey' => 'permission_id']
+                'page_code' => 'SY_PERMISSIONS', 'page_controller' => 'System\\Users\\PermissionController', 'page_module' => $Page_SY_USER_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_stay' => false, 'page_remarks' => '權限設定', 'page_options' => ['table' => 'permissions', 'primaryKey' => 'permission_id']
             ]);
             $Page_SY_PERMISSION_COLUMN = Page::create([
-                'page_code' => 'SY_PERMISSION_COLUMN', 'page_controller' => 'System\\Users\\PermissionController', 'page_module' => $Page_SY_USER_MANAGE->page_id, 'page_readonly' => true, 'page_visible' => false, 'page_remarks' => '權限設定表身', 'page_options' => ['table' => 'permission_column', 'primaryKey' => 'permission_column_id']
+                'page_code' => 'SY_PERMISSION_COLUMN', 'page_controller' => 'System\\Users\\PermissionController', 'page_module' => $Page_SY_USER_MANAGE->page_id, 'page_readonly' => true, 'page_visible' => false, 'page_stay' => false, 'page_remarks' => '權限設定表身', 'page_options' => ['table' => 'permission_column', 'primaryKey' => 'permission_column_id']
             ]);
 
             $Page_SY_PAGE_MANAGE = Page::create([
-                'page_code' => 'SY_PAGE_MANAGE', 'page_module' => $Page_SY->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 1, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => '表單管理'
+                'page_code' => 'SY_PAGE_MANAGE', 'page_module' => $Page_SY->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 1, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => '表單管理'
             ]);
             $Page_SY_MODULES = Page::create([
-                'page_code' => 'SY_MODULES', 'page_controller' => 'System\\Pages\\ModuleController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => 'system.list.modules', 'page_form_template' => 'system.form.modules',  'page_order' => 0, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => '模組設定', 'page_options' => ['table' => 'modules', 'primaryKey' => 'module_id']
+                'page_code' => 'SY_MODULES', 'page_controller' => 'System\\Pages\\ModuleController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => 'system.list.modules', 'page_form_template' => 'system.form.modules',  'page_order' => 0, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => '模組設定', 'page_options' => ['table' => 'modules', 'primaryKey' => 'module_id']
             ]);
             $Page_SY_PAGES = Page::create([
-                'page_code' => 'SY_PAGES', 'page_controller' => 'System\\Pages\\PageController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => 'system.list.pages', 'page_form_template' => 'system.form.pages',  'page_order' => 1, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => '頁面設定', 'page_options' => ['table' => 'pages', 'primaryKey' => 'page_id']
+                'page_code' => 'SY_PAGES', 'page_controller' => 'System\\Pages\\PageController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => 'system.list.pages', 'page_form_template' => 'system.form.pages',  'page_order' => 1, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => '頁面設定', 'page_options' => ['table' => 'pages', 'primaryKey' => 'page_id']
             ]);
             $Page_SY_FORMS = Page::create([
-                'page_code' => 'SY_FORMS', 'page_controller' => 'System\\Pages\\FormController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_remarks' => '表單設定', 'page_options' => ['table' => 'forms', 'primaryKey' => 'form_id']
+                'page_code' => 'SY_FORMS', 'page_controller' => 'System\\Pages\\FormController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_stay' => false, 'page_remarks' => '表單設定', 'page_options' => ['table' => 'forms', 'primaryKey' => 'form_id']
             ]);
             $Page_SY_FIELDS = Page::create(
-                ['page_code' => 'SY_FIELDS', 'page_controller' => 'System\\Pages\\FieldController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_remarks' => '欄位設定', 'page_options' => ['table' => 'fields', 'primaryKey' => 'field_id']
+                ['page_code' => 'SY_FIELDS', 'page_controller' => 'System\\Pages\\FieldController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_stay' => false, 'page_remarks' => '欄位設定', 'page_options' => ['table' => 'fields', 'primaryKey' => 'field_id']
             ]);
             $Page_SY_VERIFIES = Page::create([
-                'page_code' => 'SY_VERIFIES', 'page_controller' => 'System\\Users\\VerifysController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => 'system.list.verifies', 'page_form_template' => 'system.form.verifies',  'page_order' => 2, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => '審核管理', 'page_options' => ['table' => 'verifies', 'primaryKey' => 'verify_id']
+                'page_code' => 'SY_VERIFIES', 'page_controller' => 'System\\Users\\VerifysController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => 'system.list.verifies', 'page_form_template' => 'system.form.verifies',  'page_order' => 2, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => '審核管理', 'page_options' => ['table' => 'verifies', 'primaryKey' => 'verify_id']
             ]);
             $Page_SY_VERIFY_LEVEL = Page::create([
-                'page_code' => 'SY_VERIFY_LEVEL', 'page_controller' => 'System\\Users\\VerifysController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_remarks' => '審核管理表身', 'page_options' => ['table' => 'verify_level', 'primaryKey' => 'verify_level_id']
+                'page_code' => 'SY_VERIFY_LEVEL', 'page_controller' => 'System\\Users\\VerifysController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_stay' => false, 'page_remarks' => '審核管理表身', 'page_options' => ['table' => 'verify_level', 'primaryKey' => 'verify_level_id']
             ]);
             $Page_SY_VERIFY_CONDITION = Page::create([
-                'page_code' => 'SY_VERIFY_CONDITION', 'page_controller' => 'System\\Users\\VerifysController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_remarks' => '審核管理表身', 'page_options' => ['table' => '`verify_condition`', 'primaryKey' => 'verify_condition_id']
+                'page_code' => 'SY_VERIFY_CONDITION', 'page_controller' => 'System\\Users\\VerifysController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_stay' => false, 'page_remarks' => '審核管理表身', 'page_options' => ['table' => '`verify_condition`', 'primaryKey' => 'verify_condition_id']
             ]);
             $Page_SY_NOTIFICATION_SETTING = Page::create([
-                'page_code' => 'SY_NOTIFICATION_SETTING', 'page_controller' => 'System\\Users\\NotificationSettingController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => 'system.list.notification_setting', 'page_form_template' => 'system.form.notification_setting',  'page_order' => 3, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => '通知設定', 'page_options' => ['table' => 'notification_setting', 'primaryKey' => 'notification_setting_id']
+                'page_code' => 'SY_NOTIFICATION_SETTING', 'page_controller' => 'System\\Users\\NotificationSettingController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => 'system.list.notification_setting', 'page_form_template' => 'system.form.notification_setting',  'page_order' => 3, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => '通知設定', 'page_options' => ['table' => 'notification_setting', 'primaryKey' => 'notification_setting_id']
             ]);
             $Page_SY_NOTIFICATIONS = Page::create([
-                'page_code' => 'SY_NOTIFICATIONS', 'page_controller' => 'System\\Notification\\NotificationController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_remarks' => '通知內容', 'page_options' => ['table' => 'notifications', 'primaryKey' => 'notification_id']
+                'page_code' => 'SY_NOTIFICATIONS', 'page_controller' => 'System\\Notification\\NotificationController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_stay' => false, 'page_remarks' => '通知內容', 'page_options' => ['table' => 'notifications', 'primaryKey' => 'notification_id']
             ]);
             $Page_SY_NOTIFICATION_USER = Page::create([
-                'page_code' => 'SY_NOTIFICATION_USER', 'page_controller' => 'System\\Notification\\NotificationUserController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_remarks' => '通知資料', 'page_options' => ['table' => 'notification_user', 'primaryKey' => 'user_id']
+                'page_code' => 'SY_NOTIFICATION_USER', 'page_controller' => 'System\\Notification\\NotificationUserController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_stay' => false, 'page_remarks' => '通知資料', 'page_options' => ['table' => 'notification_user', 'primaryKey' => 'user_id']
             ]);
             $Page_SY_NOTIFICATION_TARGET = Page::create([
-                'page_code' => 'SY_NOTIFICATION_TARGET', 'page_controller' => 'System\\Notification\\NotificationUserController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_remarks' => '通知資料', 'page_options' => ['table' => 'notification_target', 'primaryKey' => 'notification_target_id']
+                'page_code' => 'SY_NOTIFICATION_TARGET', 'page_controller' => 'System\\Notification\\NotificationUserController', 'page_module' => $Page_SY_PAGE_MANAGE->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 0, 'page_readonly' => true, 'page_visible' => false, 'page_stay' => false, 'page_remarks' => '通知資料', 'page_options' => ['table' => 'notification_target', 'primaryKey' => 'notification_target_id']
             ]);
 
             $Page_SY_LANGUAGE_MANAGE = Page::create([
-                'page_code' => 'SY_LANGUAGE_MANAGE', 'page_module' => $Page_SY->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 2, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => '語言管理'
+                'page_code' => 'SY_LANGUAGE_MANAGE', 'page_module' => $Page_SY->page_id, 'page_list_template' => null, 'page_form_template' => null,  'page_order' => 2, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => '語言管理'
             ]);
             $Page_SY_LANGUAGES = Page::create([
-                'page_code' => 'SY_LANGUAGES', 'page_controller' => 'System\\Translation\\LanguageController', 'page_module' => $Page_SY_LANGUAGE_MANAGE->page_id, 'page_list_template' => 'system.list.languages', 'page_form_template' => 'system.form.languages', 'page_order' => 0, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => '語言種類', 'page_options' => ['table' => 'languages', 'primaryKey' => 'language_id']
+                'page_code' => 'SY_LANGUAGES', 'page_controller' => 'System\\Translation\\LanguageController', 'page_module' => $Page_SY_LANGUAGE_MANAGE->page_id, 'page_list_template' => 'system.list.languages', 'page_form_template' => 'system.form.languages', 'page_order' => 0, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => '語言種類', 'page_options' => ['table' => 'languages', 'primaryKey' => 'language_id']
             ]);
             $Page_SY_TRANSLATION = Page::create([
-                'page_code' => 'SY_TRANSLATION', 'page_controller' => 'System\\Translation\\TranslationController', 'page_module' => $Page_SY_LANGUAGE_MANAGE->page_id, 'page_list_template' => 'system.list.translation', 'page_form_template' => 'system.form.translation',  'page_order' => 1, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => '語言列表', 'page_options' => ['table' => 'translation', 'primaryKey' => 'translation_id']
+                'page_code' => 'SY_TRANSLATION', 'page_controller' => 'System\\Translation\\TranslationController', 'page_module' => $Page_SY_LANGUAGE_MANAGE->page_id, 'page_list_template' => 'system.list.translation', 'page_form_template' => 'system.form.translation',  'page_order' => 1, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => '語言列表', 'page_options' => ['table' => 'translation', 'primaryKey' => 'translation_id']
             ]);
 
             $Page_SY_PARAMETERS = Page::create([
-                'page_code' => 'SY_PARAMETERS', 'page_module' => $Page_SY->page_id, 'page_list_template' => 'system.list.parameters', 'page_form_template' => 'system.form.parameters',  'page_order' => 6, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => '參數設定', 'page_options' => ['table' => 'parameters', 'primaryKey' => 'parameter_id']
+                'page_code' => 'SY_PARAMETERS', 'page_module' => $Page_SY->page_id, 'page_list_template' => 'system.list.parameters', 'page_form_template' => 'system.form.parameters',  'page_order' => 6, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => '參數設定', 'page_options' => ['table' => 'parameters', 'primaryKey' => 'parameter_id']
             ]);
             $Page_SY_LOG = Page::create([
-                'page_code' => 'SY_LOG', 'page_module' => $Page_SY->page_id, 'page_list_template' => 'system.list.log', 'page_form_template' => '',  'page_order' => 7, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => 'Log', 'page_options' => ['table' => 'log']
+                'page_code' => 'SY_LOG', 'page_module' => $Page_SY->page_id, 'page_list_template' => 'system.list.log', 'page_form_template' => '',  'page_order' => 7, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => 'Log', 'page_options' => ['table' => 'log']
             ]);
 
             $Page_DT = Page::create([
-                'page_code' => 'DT', 'page_module' => 0, 'page_list_template' => null, 'page_form_template' => null, 'page_order' => 1, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => '開發人員工具'
+                'page_code' => 'DT', 'page_module' => 0, 'page_list_template' => null, 'page_form_template' => null, 'page_order' => 1, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => '開發人員工具'
             ]);
             $Page_DT_MAGIC_TOOLS = Page::create([
-                'page_code' => 'DT_MAGIC_TOOLS', 'page_module' => $Page_DT->page_id, 'page_list_template' => null, 'page_form_template' => null, 'page_order' => 1, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => '神奇小工具'
+                'page_code' => 'DT_MAGIC_TOOLS', 'page_module' => $Page_DT->page_id, 'page_list_template' => null, 'page_form_template' => null, 'page_order' => 1, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => '神奇小工具'
             ]);
             $Page_DT_INSERT_SQL = Page::create([
-                'page_code' => 'DT_INSERT_SQL', 'page_module' => $Page_DT_MAGIC_TOOLS->page_id, 'page_list_template' => 'a', 'page_form_template' => 'a', 'page_order' => 0, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => 'INSERT指令生產器'
+                'page_code' => 'DT_INSERT_SQL', 'page_module' => $Page_DT_MAGIC_TOOLS->page_id, 'page_list_template' => 'a', 'page_form_template' => 'a', 'page_order' => 0, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => 'INSERT指令生產器'
             ]);
 
             $Page_DT_SCHEDULES = Page::create([
-                'page_code' => 'DT_SCHEDULES', 'page_controller' => 'System\\DeveloperTools\\SchedulesController', 'page_module' => $Page_DT->page_id, 'page_list_template' => 'system.list.schedules', 'page_form_template' => 'system.form.schedules',  'page_order' => 0, 'page_readonly' => true, 'page_visible' => true, 'page_remarks' => '排程管理', 'page_options' => ['table' => 'schedules', 'primaryKey' => 'schedule_id']
+                'page_code' => 'DT_SCHEDULES', 'page_controller' => 'System\\DeveloperTools\\SchedulesController', 'page_module' => $Page_DT->page_id, 'page_list_template' => 'system.list.schedules', 'page_form_template' => 'system.form.schedules',  'page_order' => 0, 'page_readonly' => true, 'page_visible' => true, 'page_stay' => false, 'page_remarks' => '排程管理', 'page_options' => ['table' => 'schedules', 'primaryKey' => 'schedule_id']
             ]);
 
         // Add Forms
@@ -1192,6 +1192,7 @@ class InsertBasicData extends Migration
                     ['translation_type' => 'field', 'translation_code' => 'page_name', 'form_id' => null, 'translation' => '名稱'],
                     ['translation_type' => 'field', 'translation_code' => 'page_module', 'form_id' => null, 'translation' => '模組'],
                     ['translation_type' => 'field', 'translation_code' => 'page_visible', 'form_id' => null, 'translation' => '是否能見'],
+                    ['translation_type' => 'field', 'translation_code' => 'page_stay', 'form_id' => null, 'translation' => '保存後是否停留在頁面'],
                     ['translation_type' => 'field', 'translation_code' => 'page_order', 'form_id' => null, 'translation' => '排序'],
                     ['translation_type' => 'field', 'translation_code' => 'page_remarks', 'form_id' => null, 'translation' => '備註'],
                     ['translation_type' => 'field', 'translation_code' => 'page_setting', 'form_id' => null, 'translation' => '頁面設定'],

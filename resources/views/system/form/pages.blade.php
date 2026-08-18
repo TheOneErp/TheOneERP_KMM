@@ -1203,6 +1203,14 @@
                     </div>
                 </div>
             </div>
+            {{-- stay after save --}}
+            <div class="field" >
+                <label>保存後停留在頁面</label>
+                <div class="ts toggle checkbox">
+                <input type="checkbox" id="page_stay" v-model="input.page_setting.page_stay">
+                <label for="page_stay"></label>
+                    </div>
+            </div>
             {{-- Remarks --}}
             <div class="field" :class="isFieldRequired(page_fields.page_remarks)">
                 <label>@{{page_fields.page_remarks.translation}}</label>
@@ -2038,6 +2046,7 @@
                     page_code: "",
                     page_module: 0,
                     page_visible: true,
+                    page_stay: false,
                     page_readonly: false,
                     page_form_template: 'universal',
                     page_has_body: false,
@@ -2163,6 +2172,7 @@
                     page_code: "",
                     page_module: 0,
                     page_visible: true,
+                    page_stay: false,
                     page_readonly: false,
                     page_form_template: 'universal',
                     page_has_body: false,

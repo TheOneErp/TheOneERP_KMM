@@ -411,8 +411,15 @@
                 return sendAPIRequest(url,"POST",this.tmpFormData).then(result => {
                     this.status.sending = false
                     if(result.status){
-                        listVue.closeForm()
-                        listVue.queryData()
+                        if(this.config.pageData.page.page_stay){
+                            alert("儲存成功!")
+                            listVue.queryData()
+                            this.closeForm()
+                            listVue.editRow(result.headID);
+                        }else{
+                            listVue.closeForm()
+                            listVue.queryData()
+                        }
                     }else{
                         this.setErrors(result.errors)
                         this.$refs.errors.focus()

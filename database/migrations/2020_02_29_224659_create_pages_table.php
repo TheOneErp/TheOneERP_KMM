@@ -29,6 +29,7 @@ class CreatePagesTable extends Migration
                 $table->string('page_list_template')->nullable()->default(null);
                 $table->string('page_form_template')->nullable()->default(null);
                 $table->boolean('page_visible')->default(true);
+                $table->boolean('page_stay')->default(false);
                 $table->integer('page_order')->default(0);
                 $table->boolean('page_readonly')->default(false);
                 $table->longText('page_options')->nullable()->default(null);
@@ -37,7 +38,7 @@ class CreatePagesTable extends Migration
                 $table->integer('updated_by')->default(-1);
                 $table->timestamps();
 
-                $table->index(['page_id','page_code','page_visible','page_readonly'],'pages_index');
+                $table->index(['page_id','page_code','page_visible','page_stay','page_readonly'],'pages_index');
             });
         }
 

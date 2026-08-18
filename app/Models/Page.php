@@ -17,6 +17,7 @@ class Page extends Model
         'page_list_template',
         'page_form_template',
         'page_visible',
+        'page_stay',
         'page_order',
         'page_readonly',
         'page_options',
@@ -28,6 +29,7 @@ class Page extends Model
     protected $casts = [
         'page_module' => 'integer',
         'page_visible' => 'boolean',
+        'page_stay' => 'boolean',
         'page_order' => 'integer',
         'page_readonly' => 'boolean',
         'page_options' => 'array',

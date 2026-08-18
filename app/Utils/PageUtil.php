@@ -190,6 +190,7 @@ class PageUtil
                     "page_name" => is_null($pageName) ? $code : $pageName,
                     "page_readonly" => $page["page_readonly"],
                     "page_visible" => $page["page_visible"],
+                    "page_stay" => $page["page_stay"] ?? false,
                     "page_order" => $page["page_order"],
                     "page_module" => $page["page_module"],
                     "page_remarks" => $page["page_remarks"],

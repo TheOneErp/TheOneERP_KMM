@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BA202_price" language="javascript" pageWidth="595" pageHeight="420" columnWidth="572" leftMargin="14" rightMargin="9" topMargin="9" bottomMargin="14" uuid="28496186-f8e3-445a-a5bb-b18284cceaa7">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BA307" language="javascript" pageWidth="595" pageHeight="420" columnWidth="572" leftMargin="14" rightMargin="9" topMargin="9" bottomMargin="14" uuid="28496186-f8e3-445a-a5bb-b18284cceaa7">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
@@ -48,7 +48,8 @@
 	<variable name="con_con" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{con}]]></variableExpression>
 	</variable>
-	<group name="ship_code">
+	<group name="ship_code" isStartNewPage="true" isResetPageNumber="true">
+		<groupExpression><![CDATA[$F{ship_code}]]></groupExpression>
 		<groupFooter>
 			<band>
 				<property name="com.jaspersoft.studio.layout"/>
@@ -603,7 +604,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA["第"+ $V{PAGE_NUMBER} + "頁/"]]></textFieldExpression>
 			</textField>
-			<textField evaluationTime="Report">
+			<textField evaluationTime="Group" evaluationGroup="ship_code">
 				<reportElement x="289" y="66" width="289" height="13" uuid="68d393ca-032a-4d1a-88c1-3114e87c0914">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>

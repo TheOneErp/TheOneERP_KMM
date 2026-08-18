@@ -12,6 +12,7 @@
 	<field name="client_name" class="java.lang.String"/>
 	<field name="product_code" class="java.lang.String"/>
 	<field name="phone" class="java.lang.String"/>
+	<field name="contact" class="java.lang.String"/>
 	<field name="addr" class="java.lang.String"/>
 	<field name="product_name" class="java.lang.String"/>
 	<field name="unit_name" class="java.lang.String"/>
@@ -390,6 +391,26 @@
 				<textFieldExpression><![CDATA[$F{uniform_num}]]></textFieldExpression>
 			</textField>
 			<staticText>
+				<reportElement x="364" y="128" width="58" height="16" uuid="6b2f8a1d-9c73-4e2a-b5d6-1f0a8c4e7b32"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font" size="10"/>
+				</textElement>
+				<text><![CDATA[聯絡人 : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="422" y="128" width="155" height="16" uuid="d4e7c9b3-2a5f-4c81-9e6d-7b3a1f8c0d45"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contact}]]></textFieldExpression>
+			</textField>
+			<staticText>
 				<reportElement x="404" y="112" width="60" height="16" uuid="8e4d1c54-6a10-4db7-b4b8-3a44788ae2c3"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -541,29 +562,6 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="13">
-			<property name="com.jaspersoft.studio.unit.height" value="px"/>
-			<textField>
-				<reportElement x="0" y="0" width="289" height="13" uuid="fbec7105-95ed-4243-bfc5-e741dfd8b2d2">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="0810font" size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA["第"+ $V{PAGE_NUMBER} + "頁/"]]></textFieldExpression>
-			</textField>
-			<textField evaluationTime="Report">
-				<reportElement x="289" y="0" width="289" height="13" uuid="7ea3f74f-6cc2-4d21-ae83-0328c3b0c3af">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="0810font" size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA["共" + $V{PAGE_NUMBER} + "頁"]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageFooter>
-	<lastPageFooter>
 		<band height="99">
 			<staticText>
 				<reportElement x="452" y="42" width="58" height="22" uuid="1bee4709-7f7e-4806-b8bd-7f89a65e9e72"/>
@@ -842,5 +840,5 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 		</band>
-	</lastPageFooter>
+	</pageFooter>
 </jasperReport>
