@@ -5,12 +5,9 @@
 	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns" value="true"/>
-	
 	<queryString language="SQL">
 		<![CDATA[]]>
 	</queryString>
-
-	<!-- 欄位定義 -->
 	<field name="client_code" class="java.lang.String"/>
 	<field name="client_name" class="java.lang.String"/>
 	<field name="ship_date" class="java.lang.String"/>
@@ -28,8 +25,6 @@
 	<field name="s_undertakerday" class="java.lang.String"/>
 	<field name="e_undertakerday" class="java.lang.String"/>
 	<field name="user" class="java.lang.String"/>
-
-	<!-- 客戶小計變數 -->
 	<variable name="group_subtotal" class="java.math.BigDecimal" resetType="Group" resetGroup="ClientGroup" calculation="Sum">
 		<variableExpression><![CDATA[$F{ssubtotal}]]></variableExpression>
 	</variable>
@@ -39,8 +34,6 @@
 	<variable name="group_total" class="java.math.BigDecimal" resetType="Group" resetGroup="ClientGroup" calculation="Sum">
 		<variableExpression><![CDATA[$F{stotal}]]></variableExpression>
 	</variable>
-
-	<!-- 全頁總計變數 -->
 	<variable name="total_subtotal" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{ssubtotal}]]></variableExpression>
 	</variable>
@@ -50,8 +43,6 @@
 	<variable name="total_total" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{stotal}]]></variableExpression>
 	</variable>
-
-	<!-- 客戶群組定義 -->
 	<group name="ClientGroup">
 		<groupExpression><![CDATA[$F{client_code}]]></groupExpression>
 		<groupHeader>
@@ -89,7 +80,7 @@
 		<groupFooter>
 			<band height="20">
 				<staticText>
-					<reportElement x="350" y="0" width="50" height="20" uuid="22208723-666f-457e-9d1b-1ddb9e001cbe"/>
+					<reportElement x="390" y="0" width="50" height="20" uuid="22208723-666f-457e-9d1b-1ddb9e001cbe"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -99,7 +90,7 @@
 					<text><![CDATA[小計：]]></text>
 				</staticText>
 				<textField pattern="#,##0.##" isBlankWhenNull="true">
-					<reportElement x="400" y="0" width="60" height="20" uuid="fcf53668-af1c-4127-ab7c-a02d5b706b46"/>
+					<reportElement x="440" y="0" width="60" height="20" uuid="fcf53668-af1c-4127-ab7c-a02d5b706b46"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -109,7 +100,7 @@
 					<textFieldExpression><![CDATA[$V{group_subtotal}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.##" isBlankWhenNull="true">
-					<reportElement x="460" y="0" width="60" height="20" uuid="7ad3eb80-c806-419b-b498-d4eeb3eb2d0f"/>
+					<reportElement x="500" y="0" width="60" height="20" uuid="7ad3eb80-c806-419b-b498-d4eeb3eb2d0f"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -119,7 +110,7 @@
 					<textFieldExpression><![CDATA[$V{group_tax}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.##" isBlankWhenNull="true">
-					<reportElement x="520" y="0" width="70" height="20" uuid="5b603323-c938-4c40-aa11-706b02cd33f7"/>
+					<reportElement x="560" y="0" width="70" height="20" uuid="5b603323-c938-4c40-aa11-706b02cd33f7"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -129,14 +120,14 @@
 					<textFieldExpression><![CDATA[$V{group_total}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="0" y="0" width="350" height="20" uuid="941dd751-f2d5-43f5-b61b-995b7ceb0d23"/>
+					<reportElement x="0" y="0" width="390" height="20" uuid="941dd751-f2d5-43f5-b61b-995b7ceb0d23"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
 					<text><![CDATA[]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="590" y="0" width="212" height="20" uuid="941dd751-f2d5-43f5-b61b-995b7ceb0d24"/>
+					<reportElement x="630" y="0" width="172" height="20" uuid="941dd751-f2d5-43f5-b61b-995b7ceb0d24"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -145,8 +136,6 @@
 			</band>
 		</groupFooter>
 	</group>
-
-	<!-- 抬頭與表頭區域 -->
 	<title>
 		<band height="104">
 			<staticText>
@@ -205,161 +194,227 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{user}]]></textFieldExpression>
 			</textField>
-
-			<!-- 表頭標題欄位（依照圖一排列） -->
 			<staticText>
 				<reportElement x="0" y="84" width="70" height="20" uuid="f79e21b9-d697-4a36-97b8-e9dd6fa0d58a"/>
-				<box><bottomPen lineWidth="1.0"/></box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<text><![CDATA[出貨日期]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="70" y="84" width="70" height="20" uuid="ea7db162-3d7e-4ede-966e-074be380afd3"/>
-				<box><bottomPen lineWidth="1.0"/></box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<text><![CDATA[出貨單號]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="140" y="84" width="60" height="20" uuid="f4e0de14-b11c-41d0-8488-5c6e41e7a720"/>
-				<box><bottomPen lineWidth="1.0"/></box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<text><![CDATA[產品代碼]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="200" y="84" width="100" height="20" uuid="22208723-666f-457e-9d1b-1ddb9e001cbe"/>
-				<box><bottomPen lineWidth="1.0"/></box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<text><![CDATA[產品名稱]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="300" y="84" width="50" height="20" uuid="4b265a68-05dc-4e44-a0c2-2a431d927652"/>
-				<box><bottomPen lineWidth="1.0"/></box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<text><![CDATA[數量]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="350" y="84" width="50" height="20" uuid="d38c9c1e-8340-41c7-a72a-c31c7a6f4a27"/>
-				<box><bottomPen lineWidth="1.0"/></box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<text><![CDATA[單價]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="400" y="84" width="40" height="20" uuid="a2f63b4a-8c62-4d4e-9784-1aac637fcb45"/>
-				<box><bottomPen lineWidth="1.0"/></box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<text><![CDATA[稅別]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="440" y="84" width="60" height="20" uuid="3f17e262-1fcf-464d-a2b8-c8f3a151e062"/>
-				<box><bottomPen lineWidth="1.0"/></box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<text><![CDATA[小計]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="500" y="84" width="60" height="20" uuid="5489f972-b1c4-46e9-94c5-a48853f1420b"/>
-				<box><bottomPen lineWidth="1.0"/></box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<text><![CDATA[稅金]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="560" y="84" width="70" height="20" uuid="6a97aae8-4a52-4d84-b38b-7684e9592c32"/>
-				<box><bottomPen lineWidth="1.0"/></box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<text><![CDATA[合計]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="630" y="84" width="112" height="20" uuid="8c4ef580-7da2-43b0-bdc5-8dc9bf23eada"/>
-				<box><bottomPen lineWidth="1.0"/></box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<text><![CDATA[備註]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="742" y="84" width="60" height="20" uuid="941dd751-f2d5-43f5-b61b-995b7ceb0d23"/>
-				<box><bottomPen lineWidth="1.0"/></box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<text><![CDATA[付款狀態]]></text>
 			</staticText>
 		</band>
 	</title>
-
-	<!-- 明細資料列 (`Detail`) -->
 	<detail>
 		<band height="15" splitType="Prevent">
 			<textField isBlankWhenNull="true">
 				<reportElement x="0" y="0" width="70" height="15" uuid="cd4e51b9-e2d4-43ff-acc2-f3272838f6cd"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{ship_date}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="70" y="0" width="70" height="15" uuid="a002de47-e1a2-4792-a3e1-79a5d7230fa3"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{ship_code}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="140" y="0" width="60" height="15" uuid="d0ecf891-8dbb-4597-95f3-691b2c43996c"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{product_code}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="200" y="0" width="100" height="15" uuid="cb6ecad9-4112-4f4e-9733-47e96fff4997"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{product_name}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.##" isBlankWhenNull="true">
 				<reportElement x="300" y="0" width="50" height="15" uuid="850b2dc3-c592-4a25-a48b-1311394e620e"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{body_num}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.##" isBlankWhenNull="true">
 				<reportElement x="350" y="0" width="50" height="15" uuid="489edca2-02a0-4008-a503-2df522ed3dbe"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{body_price}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="400" y="0" width="40" height="15" uuid="d3994fca-ac85-4c48-9717-0372210b3c80"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{taxname}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.##" isBlankWhenNull="true">
 				<reportElement x="440" y="0" width="60" height="15" uuid="fcf53668-af1c-4127-ab7c-a02d5b706b46"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{ssubtotal}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.##" isBlankWhenNull="true">
 				<reportElement x="500" y="0" width="60" height="15" uuid="7ad3eb80-c806-419b-b498-d4eeb3eb2d0f"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{stax}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.##" isBlankWhenNull="true">
 				<reportElement x="560" y="0" width="70" height="15" uuid="5b603323-c938-4c40-aa11-706b02cd33f7"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{stotal}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="630" y="0" width="112" height="15" uuid="b25336ff-2cb7-4c6d-8e83-220b8f5cf6e9"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{h_remarks}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="742" y="0" width="60" height="15" uuid="b0e46cb8-4815-486f-9a67-4d1ebac6c764"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="0810font"/></textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="0810font"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{payment_status}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
-
-	<!-- 全頁總計 (`Summary`) -->
 	<summary>
 		<band height="25">
 			<staticText>
-				<reportElement x="350" y="5" width="50" height="20" uuid="2232622a-bff1-4dfc-a568-9c94f9bbd198"/>
+				<reportElement x="390" y="5" width="50" height="20" uuid="2232622a-bff1-4dfc-a568-9c94f9bbd198"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="0810font" isBold="true"/>
 				</textElement>
 				<text><![CDATA[總計：]]></text>
 			</staticText>
 			<textField pattern="#,##0.##" isBlankWhenNull="true">
-				<reportElement x="400" y="5" width="60" height="20" uuid="bd732baf-9501-477e-8c78-e0b8034e88c9"/>
+				<reportElement x="440" y="5" width="60" height="20" uuid="bd732baf-9501-477e-8c78-e0b8034e88c9"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid"/>
 					<bottomPen lineWidth="2.0" lineStyle="Double"/>
@@ -370,7 +425,7 @@
 				<textFieldExpression><![CDATA[$V{total_subtotal}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.##" isBlankWhenNull="true">
-				<reportElement x="460" y="5" width="60" height="20" uuid="bd732baf-9501-477e-8c78-e0b8034e88ca"/>
+				<reportElement x="500" y="5" width="60" height="20" uuid="bd732baf-9501-477e-8c78-e0b8034e88ca"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid"/>
 					<bottomPen lineWidth="2.0" lineStyle="Double"/>
@@ -381,7 +436,7 @@
 				<textFieldExpression><![CDATA[$V{total_tax}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.##" isBlankWhenNull="true">
-				<reportElement x="520" y="5" width="70" height="20" uuid="bd732baf-9501-477e-8c78-e0b8034e88cb"/>
+				<reportElement x="560" y="5" width="70" height="20" uuid="bd732baf-9501-477e-8c78-e0b8034e88cb"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid"/>
 					<bottomPen lineWidth="2.0" lineStyle="Double"/>
