@@ -7,6 +7,7 @@ use App\Utils\SessionUtil;
 use App\Utils\VerifyUtil;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class BA301{
     public $datas;
@@ -238,25 +239,65 @@ class BA301{
 
 
 
-        $this->datas = $save1;
-        $user = User::find(SessionUtil::getUserID())->name;
-        $check="";
-        foreach($this->datas as $key=>$row ){
-            $row->s_undertakerday = $filters['s_undertakerday'];
-            $row->e_undertakerday = $filters['e_undertakerday'];
-            $row->s_client_code = $filters['s_client_code'];
-            $row->e_client_code = $filters['e_client_code'];
-            $row->s_product_code = $filters['s_product_code'];
-            $row->e_product_code = $filters['e_product_code'];
+        // 同一客戶同一產品在查詢區間內的多筆出貨/退貨合併成一列：數量與金額加總，出貨日期/備註/付款狀態欄位已移除，不再需要逐筆保留
+        $rawRows = is_array($save1) ? $save1 : (method_exists($save1, 'all') ? $save1->all() : iterator_to_array($save1));
+        @file_put_contents(
+            storage_path('app/ba301_debug.txt'),
+            "==== " . date('Y-m-d H:i:s') . " raw_count=" . count($rawRows) . " ====\n" .
+            json_encode(array_map(function($r){
+                return [
+                    'client_code'  => $r->client_code ?? null,
+                    'product_code' => $r->product_code ?? null,
+                    'body_num'     => $r->body_num ?? null,
+                    'body_subtotal'=> $r->body_subtotal ?? null,
+                ];
+            }, array_slice($rawRows, 0, 30)), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . "\n\n",
+            FILE_APPEND
+        );
 
-
-            $row->user = $user;
-            if($check == $row->ship_code){
-                $row->stotal = null;
-            }else{
-                $check = $row->ship_code;
+        $grouped = [];
+        $order = [];
+        foreach ($save1 as $row) {
+            // SQL Server 的 client_code/product_code 常為固定長度 CHAR，可能帶有尾端空白，
+            // 分組比對前先 trim，避免同一產品因空白差異被視為不同鍵而無法合併
+            $key = trim($row->client_code) . '|' . trim($row->product_code);
+            if (!isset($grouped[$key])) {
+                $grouped[$key] = (object) [
+                    'client_code'   => trim($row->client_code),
+                    'client_name'   => $row->client_name,
+                    'product_code'  => trim($row->product_code),
+                    'product_name'  => $row->product_name,
+                    'unit_name'     => $row->unit_name,
+                    'body_price'    => $row->body_price,
+                    'body_num'      => 0,
+                    'body_subtotal' => 0,
+                ];
+                $order[] = $key;
             }
+            $grouped[$key]->body_num      += (float) ($row->body_num ?? 0);
+            $grouped[$key]->body_subtotal += (float) ($row->body_subtotal ?? 0);
         }
 
+        $user = User::find(SessionUtil::getUserID())->name;
+        $result = [];
+        foreach ($order as $key) {
+            $row = $grouped[$key];
+            $row->s_undertakerday = $filters['s_undertakerday'];
+            $row->e_undertakerday = $filters['e_undertakerday'];
+            $row->s_client_code   = $filters['s_client_code'];
+            $row->e_client_code   = $filters['e_client_code'];
+            $row->s_product_code  = $filters['s_product_code'];
+            $row->e_product_code  = $filters['e_product_code'];
+            $row->user = $user;
+            $result[] = $row;
+        }
+
+        @file_put_contents(
+            storage_path('app/ba301_debug.txt'),
+            "grouped_count=" . count($result) . " keys=" . json_encode($order, JSON_UNESCAPED_UNICODE) . "\n\n",
+            FILE_APPEND
+        );
+
+        $this->datas = $result;
     }
 }

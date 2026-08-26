@@ -100,7 +100,7 @@ return array(
     'App\\Http\\Inject\\RE\\RE2\\RE204' => $baseDir . '/app/Http/Inject/RE/RE2/RE204.php',
     'App\\Http\\Inject\\RE\\RE2\\RE205' => $baseDir . '/app/Http/Inject/RE/RE2/RE205.php',
     'App\\Http\\Inject\\RE\\RE2\\RE206' => $baseDir . '/app/Http/Inject/RE/RE2/RE206.php',
-    'App\\Http\\Inject\\Reports\\BA\\BA3\\BA301' => $baseDir . '/app/Http/Inject/Reports/BA/BA3/BA301 copy.php',
+    'App\\Http\\Inject\\Reports\\BA\\BA3\\BA301' => $baseDir . '/app/Http/Inject/Reports/BA/BA3/BA301.php',
     'App\\Http\\Inject\\Reports\\BA\\BA3\\BA302' => $baseDir . '/app/Http/Inject/Reports/BA/BA3/BA302.php',
     'App\\Http\\Inject\\Reports\\BA\\BA3\\BA303' => $baseDir . '/app/Http/Inject/Reports/BA/BA3/BA303 copy.php',
     'App\\Http\\Inject\\Reports\\BA\\BA3\\BA304' => $baseDir . '/app/Http/Inject/Reports/BA/BA3/BA304.php',

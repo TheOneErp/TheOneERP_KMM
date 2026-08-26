@@ -532,7 +532,7 @@ class ComposerStaticInit93f0813d08ef7222c744c4cd7dffaebe
         'App\\Http\\Inject\\RE\\RE2\\RE204' => __DIR__ . '/../..' . '/app/Http/Inject/RE/RE2/RE204.php',
         'App\\Http\\Inject\\RE\\RE2\\RE205' => __DIR__ . '/../..' . '/app/Http/Inject/RE/RE2/RE205.php',
         'App\\Http\\Inject\\RE\\RE2\\RE206' => __DIR__ . '/../..' . '/app/Http/Inject/RE/RE2/RE206.php',
-        'App\\Http\\Inject\\Reports\\BA\\BA3\\BA301' => __DIR__ . '/../..' . '/app/Http/Inject/Reports/BA/BA3/BA301 copy.php',
+        'App\\Http\\Inject\\Reports\\BA\\BA3\\BA301' => __DIR__ . '/../..' . '/app/Http/Inject/Reports/BA/BA3/BA301.php',
         'App\\Http\\Inject\\Reports\\BA\\BA3\\BA302' => __DIR__ . '/../..' . '/app/Http/Inject/Reports/BA/BA3/BA302.php',
         'App\\Http\\Inject\\Reports\\BA\\BA3\\BA303' => __DIR__ . '/../..' . '/app/Http/Inject/Reports/BA/BA3/BA303 copy.php',
         'App\\Http\\Inject\\Reports\\BA\\BA3\\BA304' => __DIR__ . '/../..' . '/app/Http/Inject/Reports/BA/BA3/BA304.php',
