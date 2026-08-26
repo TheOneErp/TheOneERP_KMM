@@ -35,7 +35,7 @@ class BA102 extends InjectBase
         AND
         so.name LIKE '%'+@tablename+'%'
         AND
-        sc.name LIKE '%'+@cloumnname+'%'
+        sc.name = @cloumnname
 
         order by 't'
 

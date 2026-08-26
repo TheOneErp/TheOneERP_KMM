@@ -33,7 +33,7 @@
 		<variableExpression><![CDATA[$F{stax}]]></variableExpression>
 	</variable>
 	<variable name="group_total" class="java.math.BigDecimal" resetType="Group" resetGroup="ClientGroup" calculation="Sum">
-		<variableExpression><![CDATA[$F{body_subtotal} + $F{stax}]]></variableExpression>
+		<variableExpression><![CDATA["稅內含".equals($F{taxname}) ? $F{body_subtotal} : ($F{body_subtotal} + $F{stax})]]></variableExpression>
 	</variable>
 	<variable name="total_subtotal" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{body_subtotal}]]></variableExpression>
@@ -42,7 +42,7 @@
 		<variableExpression><![CDATA[$F{stax}]]></variableExpression>
 	</variable>
 	<variable name="total_total" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{body_subtotal} + $F{stax}]]></variableExpression>
+		<variableExpression><![CDATA["稅內含".equals($F{taxname}) ? $F{body_subtotal} : ($F{body_subtotal} + $F{stax})]]></variableExpression>
 	</variable>
 	<group name="ClientGroup">
 		<groupExpression><![CDATA[$F{client_code}]]></groupExpression>
@@ -100,7 +100,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{group_subtotal}]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0.##" isBlankWhenNull="true">
+				<textField pattern="#,##0" isBlankWhenNull="true">
 					<reportElement x="560" y="0" width="70" height="20" uuid="5b603323-c938-4c40-aa11-706b02cd33f7"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
@@ -328,12 +328,12 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{body_subtotal}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.##" isBlankWhenNull="true">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="560" y="0" width="70" height="15" uuid="5b603323-c938-4c40-aa11-706b02cd33f7"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="0810font"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{body_subtotal} + $F{stax}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["稅內含".equals($F{taxname}) ? $F{body_subtotal} : ($F{body_subtotal} + $F{stax})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="630" y="0" width="172" height="15" uuid="b25336ff-2cb7-4c6d-8e83-220b8f5cf6e9"/>
@@ -364,7 +364,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total_subtotal}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.##" isBlankWhenNull="true">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="560" y="5" width="70" height="20" uuid="bd732baf-9501-477e-8c78-e0b8034e88cb"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid"/>
