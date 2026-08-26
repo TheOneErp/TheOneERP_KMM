@@ -90,7 +90,7 @@ class BA301{
     ->leftJoin('BA102_37 as e', 'a.client_code','=','e.client_code')
     ->leftJoin('AA202_30 as f', 'f.product_code','=','b.product_code')
     ->whereNotNull('b.combi_code');
-      
+
         //dd($BA202data,$BA203data);
         if( !empty($filters['s_undertakerday']) ){
 			$BA202data = $BA202data->where('ship_date', '>=', $filters['s_undertakerday']);
@@ -235,8 +235,8 @@ class BA301{
             ->orderby('product_code')
             ->get();
 
-       
-        
+
+
 
         $this->datas = $save1;
         $user = User::find(SessionUtil::getUserID())->name;
@@ -257,7 +257,6 @@ class BA301{
                 $check = $row->ship_code;
             }
         }
-		 dd($this->datas);
 
     }
 }
