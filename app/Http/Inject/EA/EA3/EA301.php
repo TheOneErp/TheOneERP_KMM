@@ -92,11 +92,15 @@ class EA301 extends InjectBase
 
             //dd($oldnum[0]);
             if($totalnum > $oldnum[0]){
+                $insufficientProductName = DB::table('AA202_30')
+                    ->where('product_code', $data['subData'][6247][$key]['data']['product_code'])
+                    ->value('product_name');
+                $insufficientProductLabel = $data['subData'][6247][$key]['data']['product_code'].(empty($insufficientProductName) ? '' : ' '.$insufficientProductName);
                 if($verify){
-                    $tmpArr[] = '產品：'.$data['subData'][6247][$key]['data']['product_code'].'  庫存不足';
+                    $tmpArr[] = '產品：'.$insufficientProductLabel.'  庫存不足';
                 }else{
                     array_push($tmpArr,[
-                        "text" => '產品：'.$data['subData'][6247][$key]['data']['product_code'].'  庫存不足'
+                        "text" => '產品：'.$insufficientProductLabel.'  庫存不足'
                     ]);
                 }
                 //$error= '產品：'.$data['subData'][5240][$key]['data']['product_code'].'  庫存不足';
