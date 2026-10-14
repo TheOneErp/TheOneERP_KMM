@@ -36,6 +36,31 @@
 
 @section("form_after_script")
 <script>
+    // 承辦人代碼/承辦人名稱：不可反白、選取、複製
+    (function () {
+        const LOCK_LABELS = ['承辦人代碼', '承辦人名稱'];
+        const style = document.createElement('style');
+        style.textContent = '.no-copy-field, .no-copy-field * { -webkit-user-select: none !important; user-select: none !important; } .no-copy-field input { pointer-events: none; }';
+        document.head.appendChild(style);
+
+        const markFields = () => {
+            document.querySelectorAll('.inline.field').forEach(el => {
+                const label = el.querySelector(':scope > label');
+                if (label && LOCK_LABELS.some(t => label.textContent.trim().startsWith(t))) {
+                    el.classList.add('no-copy-field');
+                }
+            });
+        };
+        new MutationObserver(markFields).observe(document.body, { childList: true, subtree: true });
+        markFields();
+
+        ['copy', 'cut', 'selectstart', 'contextmenu', 'dragstart'].forEach(type => {
+            document.addEventListener(type, e => {
+                if (e.target && e.target.closest && e.target.closest('.no-copy-field')) e.preventDefault();
+            }, true);
+        });
+    })();
+
     window.injects.injectOnInit.push((that, pageData) => {})
     window.injects.injectOnAdd.push((that, pageData) => {
         that.dataset.data.undertaker = '{{session("username")}}';
@@ -45,7 +70,11 @@
     })
     window.injects.injectOnView.push((that, pageData, id) => {})
     window.injects.injectOnEdit.push((that, pageData, id) => {})
-    window.injects.injectOnCopy.push((that, pageData, id) => {})
+    window.injects.injectOnCopy.push((that, pageData, id) => {
+        // 承辦人不沿用被複製單據的資料，改帶入目前登入的帳號
+        that.dataset.data.undertaker = '{{session("username")}}';
+        that.dataset.data.undertakername = '{{session("user_name")}}';
+    })
     window.injects.injectOnReferenceWrite.push((that, pageData, fromField, referenceData, fields, dataset) => {})
     window.injects.injectOnRowAdd.push((that, pageData, targetSubDataArray, dataset) => {})
     window.injects.injectOnRowDelete.push((that, pageData, parentDataset, formID, rowIndex) => {})
