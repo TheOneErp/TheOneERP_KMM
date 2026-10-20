@@ -23,6 +23,8 @@
         overflow: auto;
         max-height: 400px;
         margin-top: 0 !important;
+        overscroll-behavior-x: contain;
+        scrollbar-gutter: stable;
     }
 
     th.glm.table.header {
@@ -506,7 +508,7 @@
                 if(status != this.config.onScrollStatus) return
 
                 const height = ((window.innerHeight || document.documentElement.clientHeight) + 400)
-                const width = ((window.innerWidth || document.documentElement.clientWidth) + 100)
+                const width = ((window.innerWidth || document.documentElement.clientWidth) * 1.35)
                 if(this.$refs.row){
                     for(let row of this.$refs.row){
                         const rect = row.getBoundingClientRect();
