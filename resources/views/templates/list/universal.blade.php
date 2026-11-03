@@ -319,7 +319,7 @@
                     hashID = hashID == undefined ? '' : hashID
                     switch(location.hash.replace('#','').split('.')[0]){
                         case 'add':
-                            listVue.addRow();
+                            listVue.addRow(true);
                             break;
                         case 'edit':
                             listVue.editRow(hashID);
@@ -398,7 +398,16 @@
             },
 
             // Row methods
-            addRow(){
+            addRow(fromHash){
+                // 有未完成的草稿時,先讓使用者選擇「開新單」或「繼續草稿」 (由網址 #add 自動開啟時不詢問)
+                if(fromHash !== true && window.Draft && Draft.enabled(pageData.page.page_code) && Draft.list(pageData.page.page_id).length){
+                    Draft.choose(pageData.page.page_id).then(choice => {
+                        if(!choice) return
+                        formVue.addData(choice.type === 'draft' ? choice.draft : null)
+                        this.toggleForm()
+                    })
+                    return
+                }
                 formVue.addData()
                 this.toggleForm()
             },

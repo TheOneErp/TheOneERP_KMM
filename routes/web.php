@@ -28,6 +28,21 @@ Route::get('api/system/auth/languages', 'Auth\LoginController@getLoginTranslatio
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', 'Base\IndexController@index')->name("index");
+    // 保活: 讓畫面開著時 session 不會過期,並回傳最新的 CSRF token (前端 public/js/draft.js 使用)
+    Route::get('keepalive', function () {
+        return response()->json(['ok' => true, 'token' => csrf_token(), 'user' => auth()->id()])
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate');
+    })->name('system.keepalive');
+    // 清理系統快取: 清 Laravel 快取,並要求瀏覽器清除本系統網站的快取 (Clear-Site-Data 需 HTTPS,localhost 例外)。
+    // 不送 "cookies"/"storage"(避免牽連同網域其他系統,也避免清掉瀏覽器內保存的草稿);登入狀態由前端接著呼叫登出路由重置。
+    Route::post('clear-cache', function () {
+        \Artisan::call('cache:clear');
+        \Artisan::call('config:clear');
+        \Artisan::call('route:clear');
+        \Artisan::call('view:clear');
+        return response()->json(['status' => 'success', 'message' => '快取清理成功！請重新登入。',])
+            ->header('Clear-Site-Data', '"cache"');
+    })->name('system.clear.cache');
     Route::get('test', 'System\DevelopingToolsController@test');
     Route::get('getcal', 'FullCalenderController@index')->name('inject.getcal');
     Route::post('action', 'FullCalenderController@action')->name('inject.action');

@@ -268,18 +268,26 @@
                 tmpFormData : new FormData(),
 
                 parentDataset: null,
-                parentVue : null
+                parentVue : null,
+
+                // 草稿 (public/js/draft.js): id=目前這份草稿, baseline=開啟當下的內容快照 (有改動才存)
+                draftState: { id: null, baseline: null }
             }
         },
         mounted(){
             this.$el.parentElement.addEventListener('scroll',this.onScroll)
 
             window.addEventListener('resize',this.onScroll)
+
+            // 離開頁面 / 切到別的分頁時,立刻把草稿存下來
+            window.addEventListener('pagehide', () => this.draftFlush())
+            document.addEventListener('visibilitychange', () => { if(document.hidden) this.draftFlush() })
         },
         watch:{
             'dataset':{
                 handler(oldDataset,newDataset){
                     this.$emit("input",this.dataset)
+                    this.draftSchedule()
                 },
                 deep:true
             }
@@ -413,6 +421,7 @@
                 return sendAPIRequest(url,"POST",this.tmpFormData).then(result => {
                     this.status.sending = false
                     if(result.status){
+                        this.draftClear() // 儲存成功 -> 刪除對應的草稿
                         if(this.config.pageData.page.page_stay){
                             alert("儲存成功!")
                             listVue.queryData()
@@ -426,8 +435,17 @@
                         this.setErrors(result.errors)
                         this.$refs.errors.focus()
                     }
+                }, err => {
+                    // 送出失敗 (登入逾時 419 / 網路中斷 / 伺服器錯誤): 停止轉圈,畫面資料與草稿都保留
+                    this.status.sending = false
+                    this.draftFlush()
+                    if(err && err.code === 'session_expired'){
+                        if(window.Draft) Draft.sessionExpired(() => this.save(), this.draftEnabled())
+                        else alert("登入已逾時,請在新分頁重新登入後,回到此頁再按一次儲存 (請勿重新整理本頁)。")
+                    }else{
+                        alert("儲存失敗,可能是網路中斷或伺服器發生錯誤。\n畫面上的資料已保留,請稍後再按一次儲存。")
+                    }
                 })
-
             },
             verify(method) {
                 const URLS = {
@@ -538,21 +556,108 @@
 
             },
 
+            // Draft (草稿) - 只在「新增」模式且頁面有啟用時運作
+            draftEnabled(){
+                return !!window.Draft && this.config.mode === 'add' && Draft.enabled(this.pageData.page.page_code)
+            },
+            draftArm(){
+                // 表單開好、inject 跑完後再取基準快照,之後有改動才開始存草稿
+                clearTimeout(this._draftTimer)
+                this.draftState.baseline = null
+                let token = this._draftArmToken = (this._draftArmToken || 0) + 1
+                setTimeout(() => {
+                    if(token !== this._draftArmToken || !this.dataset || !this.draftEnabled()) return
+                    this.draftState.baseline = Draft.snapshotString(this.dataset)
+                },1200)
+            },
+            draftSchedule(){
+                if(this.draftState.baseline === null || !this.draftEnabled()) return
+                clearTimeout(this._draftTimer)
+                this._draftTimer = setTimeout(() => this.draftFlush(),1500)
+            },
+            draftFlush(){
+                clearTimeout(this._draftTimer)
+                if(this.draftState.baseline === null || !this.dataset || !this.draftEnabled()) return
+                let snap = Draft.snapshot(this.dataset)
+                if(JSON.stringify(snap) === this.draftState.baseline) return // 沒有改動
+                if(!this.draftState.id) this.draftState.id = Draft.newId()
+                Draft.save(this.pageData.page.page_id,{
+                    id : this.draftState.id,
+                    savedAt : Date.now(),
+                    summary : Draft.summary(snap),
+                    snap : snap
+                })
+            },
+            draftClear(){
+                clearTimeout(this._draftTimer)
+                this._draftArmToken = (this._draftArmToken || 0) + 1
+                if(this.draftState.id && window.Draft) Draft.remove(this.pageData.page.page_id,this.draftState.id)
+                this.draftState = { id : null, baseline : null }
+            },
+            draftBuildDataset(snap){
+                let schema = this.config.schema[snap.form_id]
+                let ds = {
+                    form_id : snap.form_id,
+                    status : "add",
+                    data : Object.assign(this.generateEmptyData(schema),snap.data),
+                    subData : {}
+                }
+                Object.values(this.config.schema)
+                    .filter(form => form.form_parent == snap.form_id)
+                    .forEach(form => {
+                        let rows = (snap.subData && snap.subData[form.form_id]) || []
+                        ds.subData[form.form_id] = rows.length
+                            ? rows.map(row => this.draftBuildDataset(row))
+                            : [this.generateEmptyDataset(form)]
+                    })
+                return ds
+            },
+            draftApply(ds,snap){
+                if(!ds || !snap) return
+                for(let [key,value] of Object.entries(snap.data || {})){
+                    if(key in ds.data) ds.data[key] = value
+                    else this.$set(ds.data,key,value)
+                }
+                for(let [formID,rows] of Object.entries(snap.subData || {})){
+                    let target = (ds.subData && ds.subData[formID]) || []
+                    rows.forEach((rowSnap,index) => { if(target[index]) this.draftApply(target[index],rowSnap) })
+                }
+            },
+
             // External methods
             closeForm(){
+                this.draftFlush()
                 if(this.config.mode.includes("reference"))
                     this.$emit("close")
                 else
                     listVue.closeForm()
             },
-            addData(){
+            async addData(draft = null){
+                this.draftFlush() // 先把上一張新增單的草稿存好
+                this.draftState = { id : null, baseline : null }
                 this.dataset = null
                 this.config.mode = "add"
                 this.config.modeText = " - {{$commonTranslations['add']}}"
                 this.$set(this.config,'fieldOptions',{})
+                if(draft){
+                    try{
+                        this.dataset = this.draftBuildDataset(draft.snap)
+                        this.draftState.id = draft.id
+                    }catch(e){
+                        console.error(e)
+                        this.dataset = null
+                        draft = null
+                        alert("草稿內容無法還原,已改為開新單。")
+                    }
+                }
                 this.init()
 
-                this.injectOnAdd(this)
+                try{
+                    await this.injectOnAdd(this)
+                    if(draft) this.draftApply(this.dataset,draft.snap) // inject 可能改掉預設值,再套回草稿內容
+                }finally{
+                    this.draftArm()
+                }
             },
             async viewData(id){
                 this.status.loading = true

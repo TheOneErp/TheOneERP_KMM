@@ -60,6 +60,7 @@
     </script>
 
     <script src="{{ asset('js/main.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/draft.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/common.js') }}?v={{ time() }}"></script>
 
     @yield('footer')

@@ -4,21 +4,24 @@
         class="item"
         style="z-index: 2;"
         id="menuButton"
-        data-tooltip="{{ $commonTranslations['menu'] }}"
     ><i class="list icon"></i></a>
     <a
         class="item glm header title"
         href={{ route("index") }}
-        data-tooltip="{{ $commonTranslations['index'] }}"
 
     >
 	<!-- <img style="padding-top:5px " height="50" border="0" src="http://ul.clouderptw.com:8080/TheOneERP_yl/resources/image/LOGO_210309.jpg" alt="雲量客服"> -->
 	{{ env("APP_NAME") }}
 </a>
+	<a
+		class="item"
+		style="z-index: 2;"
+		id="clearCache"
+	><i class="refresh icon"></i></a>
     <div class="right menu">
 	<div class="item"><p id="timer"></p></div>
 	<a href="line://ti/p/@465pujez" target="_blank" class="item"
-	style="z-index: 2;" id="open_line" data-tooltip="雲量客服"><i class="volume control phone icon" ></i></a>
+	style="z-index: 2;" id="open_line" ><i class="volume control phone icon" ></i></a>
 	{{-- <a href="line://ti/p/@465pujez" target="_blank"><img style="padding-top:5px " height="50" border="0" src="https://ul.clouderptw.com:13579/TheOneERP_yl/resources/image/LOGO_210309.jpg" alt="雲量客服"></a> --}}
         <div class="item">{{$commonTranslations["welcome"]}}, {{session("user_name")}}</div>
         <a
@@ -27,20 +30,17 @@
             style="z-index: 2;"
             id="noticeOpen"
             @click="getNotice"
-            data-tooltip="{{ $commonTranslations['notification'] }}"
         ><i class="bell icon outline"></i></a>
         <a
             href="{{ route("users_form",["type" => "update", "id" => session('user_id')]) }}"
             class="item"
             style="z-index: 2;"
-            data-tooltip="{{ $commonTranslations['profile'] }}"
         ><i class="user outline icon"></i></a>
         <a
             href="{{ route("system.auth.logout.get") }}"
             class="item"
 			id="logout"
             style="z-index: 2;"
-            data-tooltip="{{ $commonTranslations['logout'] }}"
         ><i class="log out icon"></i></a>
 
     </div>
@@ -69,6 +69,42 @@
 @section('script')
 @parent
 <script>
+document.getElementById("clearCache").addEventListener('click', function () {
+    if (confirm('確定要清理系統快取嗎？')) {
+        // 清理中遮罩(避免等待期間重複點擊或誤以為當機)
+        let cacheMask = document.createElement('div');
+        cacheMask.id = 'clearCacheMask';
+        cacheMask.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.55);z-index:99999;display:flex;align-items:center;justify-content:center;';
+        cacheMask.innerHTML = '<div style="background:#fff;padding:28px 44px;border-radius:8px;text-align:center;font-size:18px;color:#333;box-shadow:0 4px 20px rgba(0,0,0,.3);"><i class="notched circle loading icon" style="font-size:28px;"></i><div style="margin-top:12px;">清理中，請稍候…</div><div style="margin-top:6px;font-size:13px;color:#888;">完成後將自動登出，請重新登入</div></div>';
+        document.body.appendChild(cacheMask);
+        const removeCacheMask = () => { if (cacheMask && cacheMask.parentNode) cacheMask.parentNode.removeChild(cacheMask); };
+        fetch("{{ route('system.clear.cache') }}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': window.csrfToken,
+            },
+        })
+        .then(response => response.json())
+		.then(data => {
+			if (data.status === 'success') {
+				alert(data.message); // 提示成功訊息
+				// 伺服器已回傳 Clear-Site-Data(清除本網站快取與 Cookie);
+				// 再走一次登出,確保即使瀏覽器不支援該標頭(例如非 HTTPS)也會清掉登入狀態並回到登入頁
+				location.href = "{{ route('system.auth.logout.get') }}";
+			} else {
+				removeCacheMask();
+				alert('快取清理失敗！');
+			}
+		})
+        .catch(error => {
+            console.error('清理快取失敗：', error);
+            removeCacheMask();
+            alert('系統發生錯誤，請稍後再試！');
+        });
+    }
+});
+
 document.getElementById("menuButton").addEventListener('click',(e) => {
     document.getElementById("menu").className = document.getElementById("menu").className.includes("four") ? "zero wide column" : "four wide column"
     document.getElementById("content").className = document.getElementById("content").className.includes("twelve") ? "sixteen wide column" : "twelve wide column"

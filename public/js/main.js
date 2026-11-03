@@ -119,8 +119,17 @@ function sendAPIRequest(url, method, data) {
             redirect: 'follow',
             body: data == null ? null : data
         })
-        .then(_ => {
-            return _.json()
+        .then(res => {
+            // 登入逾時: 419 (CSRF/session 過期)、401 或被導回登入頁 -> 丟出明確錯誤,讓呼叫端停止轉圈並保留資料
+            let path = '';
+            try { path = new URL(res.url).pathname } catch (e) { }
+            if (res.status === 419 || res.status === 401 || (res.redirected && /\/login\/?$/.test(path))) {
+                let err = new Error('session_expired');
+                err.code = 'session_expired';
+                err.status = res.status;
+                throw err;
+            }
+            return res.json()
         })
 }
 
