@@ -24,17 +24,18 @@ class EA212
             // ---------- BA202 ----------
             $opBA202 = DB::table('BA202_53 as a')
                 ->select(
-                    'c.body_depot_code as depot_code',
+                    'a.body_depot_code as depot_code',
                     'a.product_code',
                     DB::raw('SUM(a.body_num) as opening_qty')
                 )
                 ->leftJoin('BA202_52 as c', 'c.id', '=', 'a.parent_id')
-                ->where('a.product_kind','!=','費用')
-                ->where('a.product_kind','!=','運費')
-                ->where('a.product_kind','!=','折扣')
+                ->leftJoin('AA202_30 as pk', 'pk.product_code', '=', 'a.product_code')
+                ->where('pk.product_kind','!=','費用')
+                ->where('pk.product_kind','!=','運費')
+                ->where('pk.product_kind','!=','折扣')
                 ->whereNull('a.combi_code')
                 ->where('c.ship_date', '<=', $dateBefore)
-                ->groupBy('c.body_depot_code', 'a.product_code');
+                ->groupBy('a.body_depot_code', 'a.product_code');
 
             $opBA202_1 = DB::table('BA202_52 as a')
                 ->select(
@@ -55,17 +56,18 @@ class EA212
             // ---------- BA211 ----------
             $opBA211 = DB::table('BA211_6264 as a')
                 ->select(
-                    'c.body_depot_code as depot_code',
+                    'a.body_depot_code as depot_code',
                     'a.product_code',
                     DB::raw('SUM(a.body_num) as opening_qty')
                 )
                 ->leftJoin('BA211_6263 as c', 'c.id', '=', 'a.parent_id')
-                ->where('a.product_kind','!=','費用')
-                ->where('a.product_kind','!=','運費')
-                ->where('a.product_kind','!=','折扣')
+                ->leftJoin('AA202_30 as pk', 'pk.product_code', '=', 'a.product_code')
+                ->where('pk.product_kind','!=','費用')
+                ->where('pk.product_kind','!=','運費')
+                ->where('pk.product_kind','!=','折扣')
                 ->whereNull('a.combi_code')
                 ->where('c.ship_date', '<=', $dateBefore)
-                ->groupBy('c.body_depot_code', 'a.product_code');
+                ->groupBy('a.body_depot_code', 'a.product_code');
 
             $opBA211_1 = DB::table('BA211_6263 as a')
                 ->select(
@@ -86,17 +88,18 @@ class EA212
             // ---------- BA203 ----------
             $opBA203 = DB::table('BA203_62 as a')
                 ->select(
-                    'c.body_depot_code as depot_code',
+                    'a.body_depot_code as depot_code',
                     'a.product_code',
                     DB::raw('SUM(a.body_num) as opening_qty')
                 )
                 ->leftJoin('BA203_61 as c', 'c.id', '=', 'a.parent_id')
-                ->where('a.product_kind','!=','費用')
-                ->where('a.product_kind','!=','運費')
-                ->where('a.product_kind','!=','折扣')
+                ->leftJoin('AA202_30 as pk', 'pk.product_code', '=', 'a.product_code')
+                ->where('pk.product_kind','!=','費用')
+                ->where('pk.product_kind','!=','運費')
+                ->where('pk.product_kind','!=','折扣')
                 ->whereNull('a.combi_code')
                 ->where('c.back_day', '<=', $dateBefore)
-                ->groupBy('c.body_depot_code', 'a.product_code');
+                ->groupBy('a.body_depot_code', 'a.product_code');
 
             $opBA203_1 = DB::table('BA203_61 as a')
                 ->select(
@@ -117,30 +120,32 @@ class EA212
             // ---------- CA202 ----------
             $opCA202 = DB::table('CA202_55 as a')
                 ->select(
-                    'c.body_depot_code as depot_code',
+                    'a.body_depot_code as depot_code',
                     'a.product_code',
                     DB::raw('SUM(a.body_num) as opening_qty')
                 )
                 ->leftJoin('CA202_54 as c', 'c.id', '=', 'a.parent_id')
-                ->where('a.product_kind','!=','費用')
-                ->where('a.product_kind','!=','運費')
-                ->where('a.product_kind','!=','折扣')
+                ->leftJoin('AA202_30 as pk', 'pk.product_code', '=', 'a.product_code')
+                ->where('pk.product_kind','!=','費用')
+                ->where('pk.product_kind','!=','運費')
+                ->where('pk.product_kind','!=','折扣')
                 ->where('c.receive_day', '<=', $dateBefore)
-                ->groupBy('c.body_depot_code', 'a.product_code');
+                ->groupBy('a.body_depot_code', 'a.product_code');
 
             // ---------- CA203 ----------
             $opCA203 = DB::table('CA203_64 as a')
                 ->select(
-                    'c.body_depot_code as depot_code',
+                    'a.body_depot_code as depot_code',
                     'a.product_code',
                     DB::raw('SUM(-a.body_num) as opening_qty')
                 )
                 ->leftJoin('CA203_63 as c', 'c.id', '=', 'a.parent_id')
-                ->where('a.product_kind','!=','費用')
-                ->where('a.product_kind','!=','運費')
-                ->where('a.product_kind','!=','折扣')
+                ->leftJoin('AA202_30 as pk', 'pk.product_code', '=', 'a.product_code')
+                ->where('pk.product_kind','!=','費用')
+                ->where('pk.product_kind','!=','運費')
+                ->where('pk.product_kind','!=','折扣')
                 ->where('c.abort_day', '<=', $dateBefore)
-                ->groupBy('c.body_depot_code', 'a.product_code');
+                ->groupBy('a.body_depot_code', 'a.product_code');
 
             // ---------- EA202 ----------
             $opEA202_out = DB::table('EA202_60 as a')
