@@ -205,18 +205,18 @@ class BA202Controller extends Controller{
 		$reportData = DB::table('BA202_52 as a')
                 ->select(DB::raw("a.ship_code,a.ship_date,a.client_code,a.client_name,
                 a.fax,     
-				a.otax as otax,
-				a.osubtotal as osubtotal,
-				ROUND(a.ototal, 0) as ototal,a.invoice_num,a.remarks as head_remarks,b.product_code, b.product_name ,
+				ROUND(a.otax, 0) as otax,
+				ROUND(a.osubtotal, 0) as osubtotal,
+				(ROUND(a.osubtotal, 0) + ROUND(a.otax, 0)) as ototal,a.invoice_num,a.remarks as head_remarks,b.product_code, b.product_name ,
                 b.body_num,b.unit_name, b.body_price ,b.body_subtotal ,b.remarks,b.gift_options,'1' as sn,b.id as idid,'1' as con") )
 				->leftJoin('BA202_53 as b', 'b.parent_id','=','a.id')
 				->where('ship_code','=',$ship_code);
         $reportData1 = DB::table('BA202_52 as a')
         ->select(DB::raw("a.ship_code,a.ship_date,a.client_code,a.client_name ,
         a.fax ,
-		a.otax as otax,
-        a.osubtotal as osubtotal,
-        ROUND(a.ototal, 0) as ototal,a.invoice_num,a.remarks as head_remarks,
+		ROUND(a.otax, 0) as otax,
+        ROUND(a.osubtotal, 0) as osubtotal,
+        (ROUND(a.osubtotal, 0) + ROUND(a.otax, 0)) as ototal,a.invoice_num,a.remarks as head_remarks,
         d.cont_code as product_code,d.cont_name as product_name ,
         CAST(b.body_num*d.body_num*d.body_rate AS decimal(10,2)) as body_num,d.unit_name,
         null as body_price ,null as body_subtotal ,null as remarks,null as gift_options,'2' as sn,b.id as idid,null as con") )
@@ -314,17 +314,17 @@ class BA202Controller extends Controller{
 
 		$reportData = DB::table('BA211_6263 as a')
                 ->select(DB::raw("a.ship_code,a.ship_date,a.client_code,a.client_name ,      
-				a.otax as otax,
-				a.osubtotal as osubtotal,
-				ROUND(a.ototal, 0) as ototal,a.invoice_num,a.remarks as head_remarks,b.product_code, b.product_name ,
+				ROUND(a.otax, 0) as otax,
+				ROUND(a.osubtotal, 0) as osubtotal,
+				(ROUND(a.osubtotal, 0) + ROUND(a.otax, 0)) as ototal,a.invoice_num,a.remarks as head_remarks,b.product_code, b.product_name ,
                 b.body_num,b.unit_name, b.body_price ,b.body_subtotal ,b.remarks,b.gift_options,'1' as sn,b.id as idid,'1' as con") )
 				->leftJoin('BA211_6264 as b', 'b.parent_id','=','a.id')
 				->where('ship_code','=',$ship_code);
         $reportData1 = DB::table('BA211_6263 as a')
         ->select(DB::raw("a.ship_code,a.ship_date,a.client_code,a.client_name ,      
-		a.otax as otax,
-        a.osubtotal as osubtotal,
-        ROUND(a.ototal, 0) as ototal,a.invoice_num,a.remarks as head_remarks,
+		ROUND(a.otax, 0) as otax,
+        ROUND(a.osubtotal, 0) as osubtotal,
+        (ROUND(a.osubtotal, 0) + ROUND(a.otax, 0)) as ototal,a.invoice_num,a.remarks as head_remarks,
         d.cont_code as product_code,d.cont_name as product_name ,
         CAST(b.body_num*d.body_num*d.body_rate AS decimal(10,2)) as body_num,d.unit_name,
         null as body_price ,null as body_subtotal ,null as remarks,null as gift_options,'2' as sn,b.id as idid,null as con") )
@@ -422,17 +422,17 @@ class BA202Controller extends Controller{
 
 		$reportData = DB::table('BA211_6263 as a')
                 ->select(DB::raw("a.ship_code,a.ship_date,a.client_code,a.client_name ,     
-				a.otax as otax,
-				a.osubtotal as osubtotal,
-				ROUND(a.ototal, 0) as ototal,a.invoice_num,a.remarks as head_remarks,b.product_code, b.product_name ,
+				ROUND(a.otax, 0) as otax,
+				ROUND(a.osubtotal, 0) as osubtotal,
+				(ROUND(a.osubtotal, 0) + ROUND(a.otax, 0)) as ototal,a.invoice_num,a.remarks as head_remarks,b.product_code, b.product_name ,
                 b.body_num,b.unit_name, b.body_price ,b.body_subtotal ,b.remarks,b.gift_options,'1' as sn,b.id as idid,'1' as con") )
 				->leftJoin('BA211_6264 as b', 'b.parent_id','=','a.id')
 				->where('ship_code','=',$ship_code);
         $reportData1 = DB::table('BA211_6263 as a')
         ->select(DB::raw("a.ship_code,a.ship_date,a.client_code,a.client_name ,      
-		a.otax as otax,
-        a.osubtotal as osubtotal,
-        ROUND(a.ototal, 0) as ototal,a.invoice_num,a.remarks as head_remarks,
+		ROUND(a.otax, 0) as otax,
+        ROUND(a.osubtotal, 0) as osubtotal,
+        (ROUND(a.osubtotal, 0) + ROUND(a.otax, 0)) as ototal,a.invoice_num,a.remarks as head_remarks,
         d.cont_code as product_code,d.cont_name as product_name ,
         CAST(b.body_num*d.body_num*d.body_rate AS decimal(10,2)) as body_num,d.unit_name,
         null as body_price ,null as body_subtotal ,null as remarks,null as gift_options,'2' as sn,b.id as idid,null as con") )

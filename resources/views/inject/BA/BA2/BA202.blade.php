@@ -36,6 +36,41 @@
 
 @section("form_after_script")
 <script>
+    // 表頭金額：小計、稅金各自四捨五入至個位數，再相加成合計（原幣、本位幣皆同）
+    (function () {
+        const toInt = v => {
+            if (v === null || v === undefined || v === '') return null;
+            const n = Number(v);
+            return Number.isFinite(n) ? Math.round(n) : null;
+        };
+        const apply = (d, sub, tax, total) => {
+            const s = toInt(d[sub]), t = toInt(d[tax]);
+            if (s === null && t === null) return;
+            const rs = s === null ? 0 : s, rt = t === null ? 0 : t;
+            if (s !== null && Number(d[sub]) !== rs) d[sub] = rs;
+            if (t !== null && Number(d[tax]) !== rt) d[tax] = rt;
+            if (Number(d[total]) !== rs + rt) d[total] = rs + rt;
+        };
+        let timer = null;
+        formVue.$watch(() => {
+            const d = formVue.dataset && formVue.dataset.data;
+            return d ? [d.osubtotal, d.otax, d.ototal, d.ssubtotal, d.stax, d.stotal].join('|') : '';
+        }, () => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                const d = formVue.dataset && formVue.dataset.data;
+                if (!d || formVue.config.mode.includes('view')) return;
+                const oldStotal = Number(d.stotal);
+                const oldOut = Number(d.amt_outstanding);
+                apply(d, 'osubtotal', 'otax', 'ototal');
+                apply(d, 'ssubtotal', 'stax', 'stotal');
+                if (d.amt_outstanding !== null && d.amt_outstanding !== undefined && oldOut === oldStotal && Number(d.stotal) !== oldStotal) {
+                    d.amt_outstanding = d.stotal;
+                }
+            }, 0);
+        });
+    })();
+
     let con = 1;
 	const bodyId1 = 53;
 	const mainPageId = 59;

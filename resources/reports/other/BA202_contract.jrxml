@@ -576,7 +576,7 @@
 				</textElement>
 				<text><![CDATA[稅金 :]]></text>
 			</staticText>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="510" y="42" width="68" height="22" uuid="338eb309-4a48-40a6-bccd-154e007f36b9">
 					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
 				</reportElement>
@@ -647,7 +647,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{ototal}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="510" y="20" width="68" height="22" uuid="39e18edd-6711-42fc-b60e-5b51da59c8dc">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>

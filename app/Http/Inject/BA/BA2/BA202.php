@@ -881,6 +881,25 @@ if($value['data']['combi_code']==""||$value['data']['combi_code']==null){
 		DB::table('BA103_82')->where('ship_code', '=', $data['data']['ship_code'])->delete();
 	}
 	// View
+    // 表頭金額：小計、稅金各自四捨五入至個位數，合計＝兩者相加（原幣、本位幣皆同）
+    static private function roundHeadAmounts(&$row)
+    {
+        if (!is_array($row) || !array_key_exists('osubtotal', $row) || !array_key_exists('otax', $row)) return;
+        $sets = [['osubtotal', 'otax', 'ototal'], ['ssubtotal', 'stax', 'stotal']];
+        $oldStotal = isset($row['stotal']) && is_numeric($row['stotal']) ? (float)$row['stotal'] : null;
+        foreach ($sets as [$sub, $tax, $total]) {
+            if (!isset($row[$sub]) || !is_numeric($row[$sub])) continue;
+            $rs = (int)round((float)$row[$sub]);
+            $rt = (isset($row[$tax]) && is_numeric($row[$tax])) ? (int)round((float)$row[$tax]) : 0;
+            $row[$sub] = $rs;
+            if (array_key_exists($tax, $row)) $row[$tax] = $rt;
+            $row[$total] = $rs + $rt;
+        }
+        if ($oldStotal !== null && isset($row['amt_outstanding']) && is_numeric($row['amt_outstanding'])
+            && (float)$row['amt_outstanding'] == $oldStotal && isset($row['stotal'])) {
+            $row['amt_outstanding'] = $row['stotal'];
+        }
+    }
     static public function beforeView(&$id, &$pageData)
     {
     }
@@ -920,12 +939,14 @@ if($value['data']['combi_code']==""||$value['data']['combi_code']==null){
     }
     static public function beforeDatasetInsert(&$dataset, &$schema, &$insertData, &$pageData)
     {
+        self::roundHeadAmounts($insertData);
     }
     static public function afterDatasetInsert(&$dataset, &$schema, &$insertData, &$pageData)
     {
     }
     static public function beforeDatasetUpdate(&$dataset, &$schema, &$updateData, &$pageData)
     {
+        self::roundHeadAmounts($updateData);
     }
     static public function afterDatasetUpdate(&$dataset, &$schema, &$updateData, &$pageData)
     {
