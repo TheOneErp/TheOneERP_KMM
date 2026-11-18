@@ -42,6 +42,30 @@ class BA208 extends InjectBase
     }
 
 	//end of bfSave
+	// 請款單(BA213)：依有效的沖帳紀錄重算已收金額/未收金額/收款日期，並同步出貨單表身付款狀態
+	static private function syncInvoices($codes){
+		foreach (array_unique($codes) as $code) {
+			$inv = DB::table('BA213_6273')->where('invoice_code', '=', $code)->first();
+			if (!$inv) continue;
+			$sum = DB::table('BA208_4225 as b')
+				->leftJoin('BA208_4224 as a', 'a.id', '=', 'b.parent_id')
+				->where('b.source_code', '=', $code)->where('b.choose', '=', '1')
+				->selectRaw('ISNULL(SUM(b.paid),0) as recd, ISNULL(SUM(b.amt_discount),0) as disc, MAX(a.h_pmt_date) as last_date')
+				->first();
+			$recd = (float)$sum->recd;
+			$outstanding = (float)$inv->ototal - $recd - (float)$sum->disc;
+			DB::table('BA213_6273')->where('id', '=', $inv->id)->update([
+				'amt_recd' => $recd,
+				'amt_outstanding' => $outstanding,
+				'recd_date' => $sum->last_date ? substr($sum->last_date, 0, 10) : null,
+			]);
+			$status = $outstanding <= 0 ? '已收款' : '未收款';
+			$ids = DB::table('BA213_6274')->where('parent_id', '=', $inv->id)->whereNotNull('source_body_id')->pluck('source_body_id')->all();
+			if (count($ids)) {
+				DB::table('BA202_53')->whereIn('id', $ids)->update(['payment_status' => $status]);
+			}
+		}
+	}
 	static public function atSave(&$data,$verify = false)
 	{
         $subDataFormId = 4225;
@@ -51,11 +75,14 @@ class BA208 extends InjectBase
 
 
         if($data['status'] == 'add'){
+            $invCodes = [];
             foreach($data['subData'][$subDataFormId] as $datakey => $value){
 
                 if($value['data']['choose'] == '1'){
                     $row = $value['data']['source_code'];
-                    if (strpos($row, 'BA203') !== false) {
+                    if (strpos($row, 'BA213') === 0) {
+                        $invCodes[] = $row;
+                    }else if (strpos($row, 'BA203') !== false) {
                         //如果未來要沖帳出貨退回單才需要寫的，預留
                     }else{
                         $HeadData = DB::table("BA202_52 as a")
@@ -118,6 +145,7 @@ class BA208 extends InjectBase
                     }
                 }
             }
+            self::syncInvoices($invCodes);
         }
         return $tmpArr;
 	}
@@ -136,11 +164,14 @@ class BA208 extends InjectBase
         $subDataFormId = 4225;
         $date=$data["data"]["h_pmt_date"];
         if( array_key_exists('subData',$data) ){
+            $invCodes = [];
             foreach($data['subData'][$subDataFormId] as $datakey => $value){
                 if($value['data']['choose'] == '1'){
                     $row = $value['data']['source_code'];
                   
-                    if (strpos($row, 'BA203') !== false) {
+                    if (strpos($row, 'BA213') === 0) {
+                        $invCodes[] = $row;
+                    }else if (strpos($row, 'BA203') !== false) {
                         //如果未來要沖帳進貨退出單才需要寫的，預留
                     }else{
                         $HeadData = DB::table("BA202_52 as a")
@@ -204,6 +235,7 @@ class BA208 extends InjectBase
                     }
                 }
             }
+            self::syncInvoices($invCodes);
 
         }
 	}

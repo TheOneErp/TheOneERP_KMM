@@ -34,6 +34,8 @@ class BA208Controller extends Controller{
 
 		DB::beginTransaction();
         foreach($data["source_code"] as $key=>$row ){
+            // 請款單(BA213)沖帳：金額於儲存沖帳紀錄時回寫請款單，這裡不異動出貨單
+            if (strpos($row, 'BA213') === 0) continue;
             // dd($row);
             $check=DB::table("BA202_52 as a")
             ->leftJoin('BA202_53 as b', 'a.id', '=', 'b.parent_id')
@@ -69,37 +71,28 @@ class BA208Controller extends Controller{
             // dd("123");
 		return $msgArr;
 	}
+    // 應收沖帳：改抓請款單(BA213)金額；日期條件為「請款日期」起迄
     static public function getReceivable(Request $request){
 		if (ValidationUtil::isJSONString($request->getContent()))
             $data = DataUtil::convertToArray(json_decode($request->getContent()));
         else
             abort(400);
 
-        $orderData = DB::table('BA202_52 as a')
-        ->leftJoin('BA202_53 as b', 'a.id', '=', 'b.parent_id')
-        ->where('a.client_code','=',$data['client_code'])
-        ->where('b.payment_status','=','未收款');
-
-        // dd($orderData);
-        // dd($orderData->count());
+        $q = DB::table('BA213_6273 as a')
+            ->where('a.client_code','=',$data['client_code']);
         if( !is_null($data['ship_date_s']) && $data['ship_date_s'] != '' ){
-			$orderData = $orderData->where('a.ship_date','>=',$data['ship_date_s']);
+			$q->where('a.invoice_date','>=',$data['ship_date_s']);
 		}
         if( !is_null($data['ship_date_e']) && $data['ship_date_e'] != '' ){
-			$orderData = $orderData->where('a.ship_date','<=',$data['ship_date_e']);
+			$q->where('a.invoice_date','<=',$data['ship_date_e']);
 		}
-        $orderData = $orderData->select(DB::raw("a.ship_code,a.ship_date,a.ototal,a.amt_recd,isnull(a.amt_discount,0) as amt_discount ,(a.ototal - a.amt_recd - isnull(a.amt_discount,0)) as amt_outstanding"))
-        ->groupBy('a.ship_code','a.ship_date','a.ototal','a.amt_recd','a.amt_discount')->orderBy('ship_code','asc')->get();
-//         $orderData = $orderData->select(DB::raw("a.ship_code,a.ototal,round(CAST(sum( CASE
-//         WHEN b_tax = '稅外加'
-//            THEN b.body_subtotal * ( 1 +  CAST(('0' + b_taxrate) AS float) )
-//         ELSE b.body_subtotal
-//    END) AS decimal(10,2)),2) as receivable"))->groupBy('a.ship_code','a.ototal')->orderBy('ship_code','asc')->get();
-            // dd("123");
-          //  dd($orderData);
-		return $orderData;
+        $disc = "(SELECT ISNULL(SUM(d.amt_discount),0) FROM BA208_4225 d WHERE d.source_code = a.invoice_code AND d.choose = 1)";
+        $q->select(DB::raw("a.invoice_code as ship_code, CONVERT(varchar(10), a.invoice_date, 23) as ship_date,
+            ISNULL(a.ototal,0) as ototal, ISNULL(a.amt_recd,0) as amt_recd, $disc as amt_discount,
+            (ISNULL(a.ototal,0) - ISNULL(a.amt_recd,0) - $disc) as amt_outstanding"))
+          ->whereRaw("(ISNULL(a.ototal,0) - ISNULL(a.amt_recd,0) - $disc) > 0");
+        return $q->orderBy('a.invoice_code','asc')->get();
 	}
-
 
 
 }

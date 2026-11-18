@@ -119,6 +119,9 @@ Route::group(['middleware' => 'auth'], function () {
                 Route::post('printShip', 'BA2\BA202Controller@printShip')->name('inject.printShip');
                 Route::post('printShip1', 'BA2\BA202Controller@printShip1')->name('inject.printShip1');
                 Route::post('printShip2', 'BA2\BA202Controller@printShip2')->name('inject.printShip2');
+                //BA213
+                Route::post('getShipForInvoice', 'BA2\BA213Controller@getShipForInvoice')->name('inject.getShipForInvoice');
+                Route::post('printInvoice', 'BA2\BA213Controller@printInvoice')->name('inject.printInvoice');
                 Route::post('printOrder3', 'BA2\BA201Controller@printOrder3')->name('inject.printOrder3');
                 Route::post('printOrder2', 'BA2\BA201Controller@printOrder2')->name('inject.printOrder2');
                 Route::post('printOrder1', 'BA2\BA201Controller@printOrder1')->name('inject.printOrder1');
