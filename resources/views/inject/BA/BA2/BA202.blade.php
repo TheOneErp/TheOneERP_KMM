@@ -71,6 +71,39 @@
         });
     })();
 
+    // 表身：滑鼠移到該列上，顯示產品名稱的浮動提示框
+    (function () {
+        const tip = document.createElement('div');
+        tip.style.cssText = 'position:fixed;z-index:99999;display:none;pointer-events:none;max-width:360px;padding:6px 10px;background:rgba(40,40,40,.92);color:#fff;font-size:14px;line-height:1.4;border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,.3);white-space:normal;word-break:break-all;';
+        document.body.appendChild(tip);
+
+        const findName = tr => {
+            const id = tr.getAttribute('tmpid');
+            const rows = formVue.dataset && formVue.dataset.subData && formVue.dataset.subData[53];
+            if (id === null || !rows) return '';
+            const row = rows.find(r => String(r.tmpID) === id);
+            return row && row.data && row.data.product_name ? String(row.data.product_name) : '';
+        };
+        const place = e => {
+            const w = tip.offsetWidth, h = tip.offsetHeight;
+            let x = e.clientX + 14, y = e.clientY + 18;
+            if (x + w > window.innerWidth - 8) x = e.clientX - w - 14;
+            if (y + h > window.innerHeight - 8) y = e.clientY - h - 14;
+            tip.style.left = Math.max(4, x) + 'px';
+            tip.style.top = Math.max(4, y) + 'px';
+        };
+        document.addEventListener('mousemove', e => {
+            const tr = e.target.closest && e.target.closest('.glm.bodyForms tbody tr');
+            const name = tr ? findName(tr) : '';
+            if (!name) { tip.style.display = 'none'; return; }
+            if (tip.textContent !== name) tip.textContent = name;
+            tip.style.display = 'block';
+            place(e);
+        });
+        document.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+        document.addEventListener('scroll', () => { tip.style.display = 'none'; }, true);
+    })();
+
     let con = 1;
 	const bodyId1 = 53;
 	const mainPageId = 59;
